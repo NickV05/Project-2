@@ -60,7 +60,6 @@ form button {
   outline: 0;
   padding: 4px;
   width: 100%;
-  margin-bottom: 20px;
 }
  
 form button {
@@ -107,17 +106,12 @@ form button:hover {
 }
  
 #to-right {
-  padding: 1em;
   font-weight: bold;
-  width:15vw;
+  width:18vw;
   display: flex;
   justify-content:space-around;
 }
  
-#to-right span {
-  color: black;
-  font-size: 1.5em;
-}
  
 #form h2 {
   display: flex;
@@ -126,17 +120,15 @@ form button:hover {
  
 #to-left {
   float: left;
-}
- 
-#to-left p a {
-  color: #000;
   font-weight: bold;
-  font-size: 2em;
+  width:18vw;
+  display: flex;
 }
  
 #logout-form {
   display: inline;
 }
+
  
 #logout-form button {
   width: 120px;
@@ -162,8 +154,8 @@ form button:hover {
 .umbrellaImg{
 width:430px;
 height: 620px;
-margin-top: 40px;
-padding-top:55px ;
+margin-top:40px;
+padding-top:55px;
 }
 
 .umbrellaImg1{
