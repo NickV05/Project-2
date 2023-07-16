@@ -83,7 +83,7 @@ form button:hover {
 }
  
 .error {
-  background: #f02b63;
+  background: black;
   box-sizing: border-box;
   color: #fff;
   margin: 20px auto;

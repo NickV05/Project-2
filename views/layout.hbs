@@ -11,11 +11,11 @@
           <p><a href="/"> Home </a></p>
         </li>
         <li id="to-right">
-          {{#unless userInSession}}
+          {{#unless user}}
           <a href="/auth/signup">Signup</a>
           <a href="/auth/login">Login</a>
           {{/unless}}
-        {{#if userInSession}}
+        {{#if user}}
           <a href="/auth/userProfile">Profile</a> 
           <form id="logout-form" action="/auth/logout" method="POST">
           <button>Logout</button>

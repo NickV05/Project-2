@@ -46,7 +46,7 @@ router.post("/signup", (req, res, next) => {
           console.log(" Username needs to be unique. Username is already used. ");
    
           res.status(500).render('auth/signup', {
-             errorMessage: 'User already exists.'
+             errorMessage: 'Username already exists.'
           });
         } else {
           next(error);
@@ -56,7 +56,7 @@ router.post("/signup", (req, res, next) => {
 
   router.get("/userProfile",isLoggedIn, (req, res) => {
 
-    res.render('users/user-profile.hbs', { userInSession: req.session.user });
+    res.render('users/user-profile.hbs', { user: req.session.user });
   });
 
 router.get('/login', (req,res,next) => {
@@ -86,7 +86,7 @@ router.post('/login', (req, res, next) => {
 
         console.log("Session AFTER login", req.session)
 
-        res.redirect("/auth/userProfile")
+        res.render("index",{user})
       } else {
         console.log("Incorrect password. ");
         res.render('auth/login', { errorMessage: 'User not found and/or incorrect password.' });
