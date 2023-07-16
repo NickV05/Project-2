@@ -13,9 +13,9 @@ router.get("/signup",isLoggedOut, (req,res) => {
 
 
 router.post("/signup", (req, res, next) => {
-    const { username, email, password } = req.body;
+    const { username, password } = req.body;
   
-    if (!username || !email || !password) {
+    if (!username|| !password) {
         res.render('auth/signup', { errorMessage: 'All fields are mandatory. Please provide your username, email and password.' });
         return;
       }
@@ -34,7 +34,7 @@ router.post("/signup", (req, res, next) => {
         return bcrypt.hash(password, salts);
       })
       .then((hashedPass) =>
-        User.create({ username, email, passwordHash: hashedPass }).then(
+        User.create({ username, passwordHash: hashedPass }).then(
           (createdUser) => res.redirect("/auth/userProfile")
         )
       )
@@ -43,7 +43,7 @@ router.post("/signup", (req, res, next) => {
           res.status(500).render('auth/signup', { errorMessage: error.message });
         } else if (error.code === 11000) {
    
-          console.log(" Username and email need to be unique. Either username or email is already used. ");
+          console.log(" Username needs to be unique. Username is already used. ");
    
           res.status(500).render('auth/signup', {
              errorMessage: 'User already exists.'
@@ -65,19 +65,19 @@ router.get('/login', (req,res,next) => {
 
 router.post('/login', (req, res, next) => {
   console.log('SESSION =====> ', req.session);
-  const { email, password } = req.body;
+  const { username, password } = req.body;
  
-  if (email === '' || password === '') {
+  if (username === '' || password === '') {
     res.render('auth/login', {
-      errorMessage: 'Please enter both, email and password to login.'
+      errorMessage: 'Please enter both, username and password to login.'
     });
     return;
   }
  
-  User.findOne({ email })
+  User.findOne({ username })
     .then(user => {
       if (!user) {
-        console.log("Email not registered. ");
+        console.log("Username not registered. ");
         res.render('auth/login', { errorMessage: 'User not found and/or incorrect password.' });
         return;
       } else if (bcrypt.compareSync(password, user.passwordHash)) {
