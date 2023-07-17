@@ -416,3 +416,8 @@ padding-top:55px;
         height:149px;
         width:200px;
       }
+
+      #discussionView{
+        display: flex;
+        justify-content: space-around;
+      }

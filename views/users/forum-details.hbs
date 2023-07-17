@@ -1,6 +1,19 @@
-<h2>Topic Details</h2>
+<div id = "discussionView">
+    <div>
+    <h2>Topic Details</h2>
+    <h3>{{foundTopic.topicName}}</h3>
+    <p>{{foundTopic.content}}</p>
+    <br>
+    <p>Added by:<img id = "userAv" src="{{foundTopic.creator.avatar}}" alt="picture"> {{foundTopic.creator.fullName}}</p>
+    {{#if userIsOwner}}
+    <a href="/rooms/edit/{{foundTopic._id}}">Edit Discussion</a>
+    <a href="/rooms/delete/{{foundTopic._id}}">Delete Discussion</a>
+    {{/if}}
+    </div>
 
-<h3>{{topicName}}</h3>
-<p>{{content}}</p>
-<br>
-<p>Added by: {{creator.fullName}}</p>
+    <div>
+        <h2>Comments</h2>
+
+    </div>
+
+</div>

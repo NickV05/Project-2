@@ -36,10 +36,13 @@ router.post("/signup", (req, res, next) => {
       })
       .then((hashedPass) =>
         User.create({ username, fullName, passwordHash: hashedPass }).then(
-          (createdUser) => res.redirect("/auth/userProfile")
+          (createdUser) => {
+            req.session.user = createdUser;
+            res.redirect(`/auth/userProfile/${createdUser._id}`)}
         )
       )
       .catch(error => {
+        console.log(error)
         if (error instanceof mongoose.Error.ValidationError) {
           res.status(500).render('auth/signup', { errorMessage: error.message });
         } else if (error.code === 11000) {

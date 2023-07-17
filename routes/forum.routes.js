@@ -25,7 +25,8 @@ router.get('/', (req,res,next) => {
     .populate('creator')
     .then((foundTopic) => {
         console.log("Found Topic", foundTopic)
-        res.render('users/forum-details.hbs', foundTopic)
+        const userIsOwner = foundTopic.creator._id.toString() === req.session.user._id;
+        res.render('users/forum-details.hbs', {foundTopic, user: req.session.user, userIsOwner})
     })
     .catch((err) => {
         console.log(err)
