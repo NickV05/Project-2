@@ -19,23 +19,6 @@ router.get('/', (req,res,next) => {
     })
   });
 
-  router.get('/details/:topicId', (req, res, next) => {
-
-    Topic.findById(req.params.topicId)
-    .populate('creator')
-    .then((foundTopic) => {
-        console.log("Found Topic", foundTopic)
-        const userIsOwner = foundTopic.creator._id.toString() === req.session.user._id;
-        res.render('users/forum-details.hbs', {foundTopic, user: req.session.user, userIsOwner})
-    })
-    .catch((err) => {
-        console.log(err)
-        next(err)
-    })
-
-})
-
-
   router.post('/createTopic', isLoggedIn, (req, res, next) => {
 
     const {topicName, content } = req.body
@@ -53,6 +36,73 @@ router.get('/', (req,res,next) => {
         console.log(err)
         next(err)
     })
+})
+
+router.get('/edit/:topicId',isLoggedIn, (req, res, next) => {
+
+  Topic.findById(req.params.topicId)
+  .populate('creator')
+  .then((foundTopic) => {
+      console.log("Found Topic", foundTopic)
+      res.render('users/edit-topic.hbs', {foundTopic, user: req.session.user})
+  })
+  .catch((err) => {
+      console.log(err)
+      next(err)
+  })
+
+})
+
+router.post('/edit/:topicId', isLoggedIn, (req, res, next) => {
+
+  const {topicName, content } = req.body
+
+  Topic.findByIdAndUpdate(
+      req.params.roomId,
+      {
+        topicName,
+        content,
+      },
+      {new: true}
+  )
+  .then((updatedTopic) => {
+      res.redirect(`/topic/details/${updatedRoom._id}`)
+  })
+  .catch((err) => {
+      console.log(err)
+      next(err)
+  })
+
+})
+
+router.get('/delete/:topicId', isLoggedIn, (req, res, next) => {
+  
+  Topic.findByIdAndDelete(req.params.topicId)
+  .then((deletedTopic) => {
+      console.log("Deleted topic:", deletedTopic)
+      res.redirect('/forum')
+  })
+  .catch((err) => {
+      console.log(err)
+      next(err)
+  })
+
+})
+
+
+router.get('/details/:topicId', (req, res, next) => {
+
+  Topic.findById(req.params.topicId)
+  .populate('creator')
+  .then((foundTopic) => {
+      console.log("Found Topic", foundTopic)
+      const userIsOwner = foundTopic.creator._id.toString() === req.session.user._id;
+      res.render('users/forum-details.hbs', {foundTopic, user: req.session.user, userIsOwner})
+  })
+  .catch((err) => {
+      console.log(err)
+      next(err)
+  })
 
 })
 

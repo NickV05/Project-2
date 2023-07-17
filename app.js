@@ -11,6 +11,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth.routes');
 var forumRouter = require('./routes/forum.routes');
+var commentRouter = require('./routes/comments.routes');
 
 var app = express();
 
@@ -46,6 +47,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/forum', forumRouter);
+app.use('/comments', commentRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
