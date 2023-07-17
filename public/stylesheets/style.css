@@ -169,7 +169,21 @@ padding-top:55px;
 .umbrellaImg1{
   width:700px;
   height: 350px;
+  background-image: url("../images/world.jpg");
+  background-size: cover;
   }
+
+#miami{
+  position: relative;
+  width:20px;
+  height:20px;
+  top:162px;
+  left:165px;
+  visibility: hidden;
+}
+#miamibut:hover + #miami {
+  visibility: visible;
+}
 
 .umbrellaImg2{
   width:100%;
@@ -184,6 +198,10 @@ padding-top:55px;
   #tours ul{
     list-style: none;
     padding-right: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   #tours p{
@@ -196,21 +214,21 @@ padding-top:55px;
   font-weight: bolder;
   }
 
-  #tours ul li{
+  #tours ul button{
   background: white;
-  border-bottom: 1px solid rgb(210, 27, 27);
   color:black;
   margin-top: 10px;
   font-weight: bold;
   }
 
-  #tours ul li{
-    background: white;
-    border-bottom: 1px solid rgb(210, 27, 27);
-    color:black;
+  #tours ul button:hover{
+    background: brown;
+    border-bottom: 1px solid black;
+    color:white;
     margin-top: 10px;
     font-weight: bold;
     }
+    
 
   #profileDiv{
     display: flex;

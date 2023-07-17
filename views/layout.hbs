@@ -25,7 +25,7 @@
         {{#if user}}
         <h2>Welcome {{ user.fullName }}!</h2>
         <li id="to-right"></li>
-          <form id="logout-form" action="/auth/userProfile/{{user.username}}" method="GET">
+          <form id="logout-form" action="/auth/userProfile/{{user._id}}" method="GET">
           <button>Profile</button>
           </form>
           <form id="logout-form" action="/auth/forum" method="GET">

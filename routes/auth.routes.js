@@ -102,7 +102,7 @@ router.post('/logout', (req, res, next) => {
   });
 });
 
-router.get("/userProfile/:username",isLoggedIn, (req, res) => {
+router.get("/userProfile/:userID", isLoggedIn, (req, res) => {
 const { username, password } = req.session.user;
 
 if(!req.session.user.avatar){
@@ -111,11 +111,15 @@ if(!req.session.user.avatar){
   res.render('users/user-profile.hbs', {user: req.session.user});
 });
 
-router.post(`/userProfile/:username`,isLoggedIn, (req, res) => {
+router.post("/userProfile/:userID", isLoggedIn, (req, res) => {
   const { fullName, avatar, username} = req.body
 
+  console.log("line 117: ", req.body)
+
+  console.log("line 119: ", req.params)
+
     User.findByIdAndUpdate(
-      req.params.userId,
+      req.params.userID,
         {
             fullName,
             avatar,
@@ -124,6 +128,8 @@ router.post(`/userProfile/:username`,isLoggedIn, (req, res) => {
         {new: true}
     )
     .then((updatedUser) => {
+      console.log("line 127:", updatedUser)
+      req.session.user = updatedUser
       res.redirect(`/auth/userProfile/${updatedUser._id}`);
     })
     .catch((err) => {
