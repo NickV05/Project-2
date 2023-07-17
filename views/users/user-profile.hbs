@@ -1,11 +1,28 @@
 {{#if user}}
-  <h2>Welcome, {{ user.username }}!</h2>
-  <p>This is your profile page my friend!</p>
-  <button>
-    <a href="/auth/userProfile">Reload the page</a>
-  </button>
+<div id = "profileDiv">
+  <h2>Edit Profile</h2>
+
+<form id = "profileDiv" action="/auth/userProfile/{{user._id}}" method="POST">
+    <img id = "userAv" src="{{user.avatar}}" alt="picture">
+    <label for = "avatar">Change Avatar</label>
+    <input id = "avatar" type="text" name="avatar" value="{{user.avatar}}">
+
+    <label for="name">Full Name</label>
+    <input id="name" type="text" name="name" value="{{user.fullName}}">
+
+    <label for="username">Username</label>
+    <input id="username" type="text" name="username"value="{{user.username}}">
+
+    <p>Employee: {{user.employee}}</p>
+
+
+    <button type="submit">Update Information</button>
+
+</form>
+</div>
+  
 {{else}}
   
-  <br><p>Still no logged in user, sorry!</p>
+  <br><p>Still not logged in user, sorry!</p>
  
 {{/if}}

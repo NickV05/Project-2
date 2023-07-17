@@ -3,6 +3,10 @@ const mongoose = require('mongoose')
 const User = require("../models/User.model")
 const bcrypt = require("bcryptjs")
 const router = new Router()
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+
 const salt = 12;
 
 const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
@@ -13,10 +17,10 @@ router.get("/signup",isLoggedOut, (req,res) => {
 
 
 router.post("/signup", (req, res, next) => {
-    const { username, password } = req.body;
+    const { username, fullName, password } = req.body;
   
-    if (!username|| !password) {
-        res.render('auth/signup', { errorMessage: 'All fields are mandatory. Please provide your username, email and password.' });
+    if (!username|| !password|| !fullName) {
+        res.render('auth/signup', { errorMessage: 'All fields are mandatory. Please provide your username, full name and password.' });
         return;
       }
 
@@ -34,7 +38,7 @@ router.post("/signup", (req, res, next) => {
         return bcrypt.hash(password, salts);
       })
       .then((hashedPass) =>
-        User.create({ username, passwordHash: hashedPass }).then(
+        User.create({ username, fullName, passwordHash: hashedPass }).then(
           (createdUser) => res.redirect("/auth/userProfile")
         )
       )
@@ -54,10 +58,6 @@ router.post("/signup", (req, res, next) => {
       });
   });
 
-  router.get("/userProfile",isLoggedIn, (req, res) => {
-
-    res.render('users/user-profile.hbs', { user: req.session.user });
-  });
 
 router.get('/login', (req,res,next) => {
   res.render('auth/login.hbs')
@@ -102,4 +102,38 @@ router.post('/logout', (req, res, next) => {
   });
 });
 
+router.get("/userProfile/:username",isLoggedIn, (req, res) => {
+const { username, password } = req.session.user;
+
+if(!req.session.user.avatar){
+  req.session.user.avatar = '/images/vector.png'
+}
+  res.render('users/user-profile.hbs', {user: req.session.user});
+});
+
+router.post(`/userProfile/:username`,isLoggedIn, (req, res) => {
+  const { fullName, avatar, username} = req.body
+
+    User.findByIdAndUpdate(
+      req.params.userId,
+        {
+            fullName,
+            avatar,
+            username
+        },
+        {new: true}
+    )
+    .then((updatedUser) => {
+      res.redirect(`/auth/userProfile/${updatedUser._id}`);
+    })
+    .catch((err) => {
+        console.log(err)
+        next(err)
+    })
+
+  });
+
+  router.get('/forum', (req,res,next) => {
+    res.render('users/forum.hbs',{user: req.session.user})
+  })
 module.exports = router;

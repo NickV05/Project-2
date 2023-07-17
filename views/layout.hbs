@@ -12,26 +12,30 @@
           <button>Home</button>
           </form>
         </li>
-        <li id="to-right">
           {{#unless user}}
+        <li id="to-right">
           <form id="logout-form" action="/auth/signup" method="GET">
           <button>Signup</button>
           </form>
           <form id="logout-form" action="/auth/login" method="GET">
           <button>Login</button>
           </form>
-          </li>
+        </li>
           {{/unless}}
         {{#if user}}
+        <h2>Welcome {{ user.fullName }}!</h2>
         <li id="to-right"></li>
-          <form id="logout-form" action="/auth/userProfile" method="GET">
+          <form id="logout-form" action="/auth/userProfile/{{user.username}}" method="GET">
           <button>Profile</button>
+          </form>
+          <form id="logout-form" action="/auth/forum" method="GET">
+          <button>Forum</button>
           </form>
           <form id="logout-form" action="/auth/logout" method="POST">
           <button>Logout</button>
           </form>
-         {{/if}}
         </li>
+        {{/if}}
       </ul>
     </nav>
     {{{body}}}

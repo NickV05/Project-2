@@ -104,6 +104,14 @@ form button:hover {
 .navBar li {
   line-height: 20px;
 }
+
+.navBar h2 {
+  width:500px;
+  height:30px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
  
 #to-right {
   font-weight: bold;
@@ -178,12 +186,14 @@ padding-top:55px;
     padding-right: 40px;
   }
 
-  #tours h2{
+  #tours p{
   background: brown;
   border: 1px solid brown;
   color: #fff;
   text-align: center;
   border-radius: 4px;
+  font-size: 20px;
+  font-weight: bolder;
   }
 
   #tours ul li{
@@ -192,4 +202,24 @@ padding-top:55px;
   color:black;
   margin-top: 10px;
   font-weight: bold;
+  }
+
+  #tours ul li{
+    background: white;
+    border-bottom: 1px solid rgb(210, 27, 27);
+    color:black;
+    margin-top: 10px;
+    font-weight: bold;
+    }
+
+  #profileDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #userAv{
+    height:100px;
+    width:100px;
   }
