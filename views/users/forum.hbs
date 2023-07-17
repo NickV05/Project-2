@@ -1,31 +1,33 @@
-{{#if user}}
+<div id ="forumView">
+    {{#if user}}
+    <div class = "forumDiv">
+         <h2>New Topic</h2>
+        <form class = "forumDiv" action="/forum/createTopic" method="POST">
+        <label> Topic Name
+        <textarea id = "topic"  cols="40" rows="5" name="topicName" placeholder="Adravil side effects" ></textarea>
+        </label>
+    
+        <label> Content
+        <textarea id = "content"  cols="40" rows="5" name="content" placeholder="Describe your question"  ></textarea>
+        </label>
+    
+        <button type="submit">Create Topic</button>
+    
+        {{#if errorMessage}}
+        <p class="error">{{errorMessage}}</p>
+    {{/if}}
+    </form>
+    </div>
+    {{#each topics}}
+        <div class = "forumDiv">
+            <textarea id ="area" cols="25" rows="3" >{{topicName}}</textarea>
+            <p> Author: {{creator.fullName}}</p>
+            <img id = "topicImg" src="/images/topic.jpg" alt="topic">
+            <a href="/forum/details/{{_id}}">View Discussion</a>   
+        </div>
+    {{/each}}
 
-<h2>New Topic</h2>
-  <form id = "forumDiv" action="/forum/createTopic" method="POST">
-    <label> Topic Name
-      <textarea id = "topic"  cols="40" rows="5" name="topicName" placeholder="Adravil side effects" ></textarea>
-    </label>
- 
-    <label> Content
-      <textarea id = "content"  cols="40" rows="5" name="content" placeholder="Describe your question"  ></textarea>
-    </label>
- 
-    <button type="submit">Create Topic</button>
- 
-    {{#if errorMessage}}
-    <p class="error">{{errorMessage}}</p>
-  {{/if}}
-  </form>
-  
-  {{#each topics}}
-
-    <a href="/forum/details/{{_id}}">
-        <p>{{topicName}} added by: {{creator.fullName}}</p>   
-    </a>
-    <hr>
-
-{{/each}}
-
-{{else}}
-  <br><p>Still not logged in user, sorry!</p>
-{{/if}}
+    {{else}}
+    <br><p>Still not logged in user, sorry!</p>
+    {{/if}}
+</div>
