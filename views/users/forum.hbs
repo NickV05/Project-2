@@ -1,1 +1,31 @@
-<h1>This is forum page</h1>
+{{#if user}}
+
+<h2>New Topic</h2>
+  <form id = "forumDiv" action="/forum/createTopic" method="POST">
+    <label> Topic Name
+      <input id = "topic" type="text" name="topicName" placeholder="Adravil side effects" />
+    </label>
+ 
+    <label> Content
+      <input id = "content" type="text" name="content" placeholder="Describe your question"  />
+    </label>
+ 
+    <button type="submit">Create Topic</button>
+ 
+    {{#if errorMessage}}
+    <p class="error">{{errorMessage}}</p>
+  {{/if}}
+  </form>
+  
+  {{#each topics}}
+
+    <a href="/forum/details/{{_id}}">
+        <p>{{topicName}} added by: {{creator.fullName}}</p>   
+    </a>
+    <hr>
+
+{{/each}}
+
+{{else}}
+  <br><p>Still not logged in user, sorry!</p>
+{{/if}}

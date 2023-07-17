@@ -3,9 +3,6 @@ const mongoose = require('mongoose')
 const User = require("../models/User.model")
 const bcrypt = require("bcryptjs")
 const router = new Router()
-const multer = require('multer');
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
 
 const salt = 12;
 
@@ -139,7 +136,4 @@ router.post("/userProfile/:userID", isLoggedIn, (req, res) => {
 
   });
 
-  router.get('/forum', (req,res,next) => {
-    res.render('users/forum.hbs',{user: req.session.user})
-  })
 module.exports = router;

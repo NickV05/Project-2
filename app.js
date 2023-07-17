@@ -10,6 +10,7 @@ var MongoStore = require('connect-mongo');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth.routes');
+var forumRouter = require('./routes/forum.routes');
 
 var app = express();
 
@@ -28,7 +29,7 @@ app.use(
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       secure: process.env.NODE_ENV === 'production',
       httpOnly: true,
-      maxAge: 360000 
+      maxAge: 720000 
     }, 
     store: MongoStore.create({
       mongoUrl: process.env.MONGODB_URI
@@ -44,6 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
+app.use('/forum', forumRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
