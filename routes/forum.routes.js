@@ -11,7 +11,7 @@ router.get('/', (req,res,next) => {
   Topic.find()
     .populate('creator')
     .then((foundTopics) => {       
-        res.render('users/forum.hbs', { topics: foundTopics },{user: req.session.user})
+        res.render('users/forum.hbs', { topics: foundTopics, user: req.session.user })
     })
     .catch((err) => {
         console.log(err)
