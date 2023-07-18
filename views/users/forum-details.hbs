@@ -33,27 +33,45 @@
 
     {{#each reviewOfOwner1}}
         <textarea cols="40" rows="5">{{comment}}</textarea>
-        <h5><img id = "userAv" src="/images/{{user.avatar}}" alt="picture"> You</h5>
-        <p class = "date">Created {{createdAt}} at {{time}}</p>
-        {{#if updateTimeRev}}
-        <p class = "date">Updated {{updDateRev}} at {{updTimeRev}}</p>
-        {{/if}}
+
+        <div class = "comProf">
+
+            <div class = "divImagProf">
+             <img id = "userAv" src="/images/{{user.avatar}}" alt="picture">
+            </div>
+
+            <div class ="dateInfo">
+             <h5>You</h5>
+             <p class = "date">Created {{createdAt}} at {{time}}</p>
+             <p class = "date">Updated {{ updatedAt}} at {{timeUpdated}}</p>
+            </div>
+
+        </div>
         <hr>
-        
-        <a href="/comments/edit/{{_id}}">Edit Comment</a>
-        <a href="/comments/delete/{{_id}}">Delete Comment</a>
+        <div class = "divLinks">
+        <a class = "links" href="/comments/edit/{{_id}}">Edit Comment</a>
+        <a class = "links" href="/comments/delete/{{_id}}">Delete Comment</a>
+        </div>
     {{/each}}
 
-    {{#each reviewOfNotOwner}}
+    {{#each reviewOfNotOwner1}}
 
         <textarea cols="40" rows="5">{{comment}}</textarea>
-        <h5><img id = "userAv" src="/images/{{user.avatar}}" alt="picture"> {{user.fullName}}</h5>
-         <p class = "date">Created {{createdAt}} at {{time}}</p>
-        {{#if updateTimeRev}}
-        <p class = "date">Updated {{ updatedAt}} at {{timeUpdated}}</p>
-        {{/if}}
-        <hr>
 
+        <div class = "comProf">
+
+            <div class = "divImagProf">
+             <img id = "userAv" src="/images/{{user.avatar}}" alt="picture">
+            </div>
+
+            <div class ="dateInfo">
+             <h5>{{user.fullName}}</h5>
+             <p class = "date">Created {{createdAt}} at {{time}}</p>
+             <p class = "date">Updated {{ updatedAt}} at {{timeUpdated}}</p>
+            </div>
+
+        </div>
+        <hr>
     {{/each}}
 
     {{else}}

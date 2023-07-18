@@ -538,10 +538,70 @@ padding-top:55px;
           width:332px;
           border: none;
           font-weight: bold;
+          border-left: solid black;
 
         }
 
         .date{
           text-align: center;
           font-weight: bold;
+        }
+
+        .comProf{
+          display: flex;
+          
+        }
+
+        .dateInfo{
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: flex-start;
+          gap:5px;
+        }
+
+        .dateInfo p, .dateInfo h5{
+          margin: 0 0 10 5;
+          font-size: 12px;
+        }
+
+        .divImagProf img{
+          height:100px;
+          width:100px;
+          border: solid black;
+
+        }
+
+        .links{
+        background: brown;
+        border: 1px solid brown;
+        border-radius: 4px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 12px;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        font-weight: bold;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-transform: uppercase;
+        transition: 0.3s ease background;
+        width: 130px;
+        height: 26.8px;
+        margin:0px
+        }
+
+        .links:hover {
+          display:flex;
+          justify-content: center;
+          align-items: center;
+          background: #fff;
+          color: brown;
+          height: 26.8px;
+          transition: 0.3s ease background;}
+
+        .divLinks{
+          display: flex;
+          justify-content: space-around;
         }

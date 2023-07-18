@@ -3,8 +3,6 @@ const mongoose = require('mongoose')
 const User = require("../models/User.model")
 const Topic = require("../models/Topic.model")
 const router = new Router()
-const { DateTime } = require("luxon")
-
 
 const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
 
@@ -143,10 +141,11 @@ router.get('/details/:topicId', (req, res, next) => {
 
       let reviewOfOwner1 = reviewOfOwner.map((review) => {
         return {...review._doc, createdAt: review.createdAt.toLocaleDateString(), time: review.createdAt.toLocaleTimeString(),
-          updatedAt: review.updatedAt.toLocaleDateString(), timeUpdated: review.updated.toLocaleTimeString(), }
+          updatedAt: review.updatedAt.toLocaleDateString(), timeUpdated: review.updatedAt.toLocaleTimeString()}
       });
       let reviewOfNotOwner1 = reviewOfNotOwner.map((review) => {
-        return {...review._doc, createdAt: review.createdAt.toLocaleDateString(), time: review.createdAt.toLocaleTimeString()}
+        return {...review._doc, createdAt: review.createdAt.toLocaleDateString(), time: review.createdAt.toLocaleTimeString(),
+          updatedAt: review.updatedAt.toLocaleDateString(), timeUpdated: review.updatedAt.toLocaleTimeString(),}
       });
       
       
