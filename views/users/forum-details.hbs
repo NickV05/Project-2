@@ -1,14 +1,16 @@
 <div id = "discussionView">
-    <div>
+    <div id ="topicView">
     <h2>Topic Details</h2>
-    <h3>{{foundTopic.topicName}}</h3>
-    <img src="/images/{{foundTopic.photo}}" alt="topicPhoto">
-    <p>{{foundTopic.content}}</p>
+    <h3 id ="topicText">{{foundTopic.topicName}}</h3>
+    <img id = "topicImg2" src="/images/{{foundTopic.photo}}" alt="topicPhoto">
+    <p id ="contentText">{{foundTopic.content}}</p>
     <br>
-    <p>Added by:<img id = "userAv" src="/images/{{foundTopic.creator.avatar}}" alt="picture"> {{foundTopic.creator.fullName}}</p>
+    <p id = "authorText">Author:<img id = "authorAv" src="/images/{{foundTopic.creator.avatar}}" alt="picture"> <p id = "authorText2">{{foundTopic.creator.fullName}}</p></p>
     {{#if userIsOwner}}
-    <a href="/forum/edit/{{foundTopic._id}}">Edit Discussion</a>
-    <a href="/forum/delete/{{foundTopic._id}}">Delete Discussion</a>
+    <div id = "authorOptions">
+        <a href="/forum/edit/{{foundTopic._id}}">Edit Discussion</a>
+        <a href="/forum/delete/{{foundTopic._id}}">Delete Discussion</a>
+    </div>
     {{/if}}
     </div>
 

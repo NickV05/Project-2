@@ -429,3 +429,81 @@ padding-top:55px;
           
         }
       }
+      #topicView h2{
+        text-align: center;
+        border-bottom: 2px solid brown;
+        max-width:400px;
+        margin: 20 80 20 80px;
+        font-family:Verdana, Geneva, Tahoma, sans-serif
+      }
+      #topicText{
+        max-width:400px;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+      }
+      #topicImg2{
+        width:400px;
+        height: auto;
+        border: solid black;
+      }
+      #contentText{
+        font-size: 18px;
+        max-width:400px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+
+      }
+
+      #authorText{
+        font-size: 15px;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: bold;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #authorText2 {
+        text-align: center;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: bold;
+      }
+
+      #authorAv{
+        height:100px;
+        width:100px;
+        border: solid black;
+      }
+
+      #authorOptions{
+        display: flex;
+        justify-content: space-around;
+      }
+      #authorOptions a {
+        background: brown;
+        border: 1px solid brown;
+        border-radius: 4px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 12px;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        font-weight: bold;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-transform: uppercase;
+        transition: 0.3s ease background;
+        width: 150px;
+        height: 26.8px;
+        margin-top:20px;
+      }
+
+      #authorOptions a:hover {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        margin-top:20px;
+        background: #fff;
+        color: brown;
+        height: 26.8px;
+        transition: 0.3s ease background;}

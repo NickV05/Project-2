@@ -103,8 +103,8 @@ router.post('/logout', (req, res, next) => {
 });
 
 router.get("/userProfile/:userID", isLoggedIn, (req, res) => {
-const { username, password } = req.session.user;
-
+const { username, password, reviews, discussions } = req.session.user;
+console.log(req.session.user)
 if(!req.session.user.avatar){
   req.session.user.avatar = 'vector.png'
 }
