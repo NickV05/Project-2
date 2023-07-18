@@ -411,10 +411,12 @@ padding-top:55px;
         border: none;
         font-weight: bold;
         text-align: center;
+        border-bottom: solid black;
       }
       #topicImg{
         height:149px;
         width:200px;
+        border: solid black;
       }
 
       #discussionView{
@@ -604,4 +606,9 @@ padding-top:55px;
         .divLinks{
           display: flex;
           justify-content: space-around;
+        }
+
+        #noRev{
+          text-align: center;
+          font-weight: bold;
         }
