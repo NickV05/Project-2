@@ -3,7 +3,8 @@ const { link } = require('../routes');
 
 const reviewSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: "User" },
-    comment: { type: String}
+    comment: { type: String},
+    topic: { type: Schema.Types.ObjectId, ref: "Topic" },
   });
 
 module.exports = model("Review", reviewSchema);

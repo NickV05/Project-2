@@ -114,10 +114,6 @@ if(!req.session.user.avatar){
 router.post("/userProfile/:userID", isLoggedIn, (req, res) => {
   const { fullName, avatar, username} = req.body
 
-  console.log("line 117: ", req.body)
-
-  console.log("line 119: ", req.params)
-
     User.findByIdAndUpdate(
       req.params.userID,
         {
