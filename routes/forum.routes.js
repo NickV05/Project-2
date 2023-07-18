@@ -21,12 +21,13 @@ router.get('/', (req,res,next) => {
 
   router.post('/createTopic', isLoggedIn, (req, res, next) => {
 
-    const {topicName, content } = req.body
+    const {topicName, content} = req.body
 
     Topic.create({
        topicName,
        content,
-       creator: req.session.user._id
+       creator: req.session.user._id,
+       photo:"topic.jpg"
     })
     .then((createdTopic) => {
         console.log("Created Topic:", createdTopic)
@@ -55,13 +56,14 @@ router.get('/edit/:topicId',isLoggedIn, (req, res, next) => {
 
 router.post('/edit/:topicId', (req, res, next) => {
 
-  const {topicName, content } = req.body
+  const {topicName, content, photo } = req.body
 
   Topic.findByIdAndUpdate(
       req.params.topicId,
       {
         topicName,
         content,
+        photo
       },
       {new: true}
   )

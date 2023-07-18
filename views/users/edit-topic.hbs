@@ -8,6 +8,10 @@
         <label> Content
         <textarea id = "content"  cols="40" rows="5" name="content">{{foundTopic.content}}</textarea>
         </label>
+
+        <img id = "userAv" src="/images/{{foundTopic.photo}}" alt="picture">
+        <label for="photo">Topic photo</label>
+        <input type="file" name="photo" id="photo">
         <button type="submit">EDIT Topic</button>
         {{#if errorMessage}}
         <p class="error">{{errorMessage}}</p>
