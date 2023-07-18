@@ -6,6 +6,10 @@
     <p id ="contentText">{{foundTopic.content}}</p>
     <br>
     <p id = "authorText">Author:<img id = "authorAv" src="/images/{{foundTopic.creator.avatar}}" alt="picture"> <p id = "authorText2">{{foundTopic.creator.fullName}}</p></p>
+    <p>Created at {{foundTopic.createdAt}}</p>
+    {{#if updateTime}}
+    <p>Updated at {{foundTopic.updatedAt}}</p>
+    {{/if}}
     {{#if userIsOwner}}
     <div id = "authorOptions">
         <a href="/forum/edit/{{foundTopic._id}}">Edit Discussion</a>
@@ -14,7 +18,7 @@
     {{/if}}
     </div>
 
-    <div>
+    <div id ="commentView">
         <h2>Comments</h2>
     <form action="/comments/add-review/{{foundTopic._id}}" method="post">
 
@@ -28,8 +32,8 @@
 {{#if foundTopic.reviews}}
 
     {{#each reviewOfOwner}}
-        <p>{{comment}}</p>
-        <h5><img id = "userAv" src="/images/{{user.avatar}}" alt="picture"> {{user.fullName}}</h5>
+        <textarea cols="40" rows="5">{{comment}}</textarea>
+        <h5><img id = "userAv" src="/images/{{user.avatar}}" alt="picture"> You</h5>
         <hr>
         
         <a href="/comments/edit/{{_id}}">Edit Comment</a>
@@ -38,7 +42,7 @@
 
     {{#each reviewOfNotOwner}}
 
-        <p>{{comment}}</p>
+        <textarea cols="40" rows="5">{{comment}}</textarea>
         <h5><img id = "userAv" src="/images/{{user.avatar}}" alt="picture"> {{user.fullName}}</h5>
         <hr>
 

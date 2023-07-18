@@ -19,7 +19,7 @@ const userSchema = new Schema(
     },
     avatar: {
       type: String,
-      default: null,
+      default: 'vector.png',
     },
     employee: {
       type: String,

@@ -7,6 +7,9 @@ const topicSchema = new Schema({
     content: { type: String},
     reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
     photo: {type: String, default: null}
+  },
+  {
+    timestamps: true
   });
  
 module.exports = model('Topic', topicSchema);
