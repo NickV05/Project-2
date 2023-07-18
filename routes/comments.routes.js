@@ -46,4 +46,39 @@ router.get('/delete/:commentId', (req, res, next) => {
   
   })
 
+  router.get('/edit/:commentId', (req, res, next) => {
+    Review.findById(req.params.commentId)
+    .populate('user')
+    .then((foundReview) => {
+        console.log("Found Review", foundReview)
+        res.render("users/edit-review.hbs", {foundReview})
+    })
+    .catch((err) => {
+        console.log(err)
+        next(err)
+    })
+  
+  })
+
+  router.post('/edit/:commentsId', (req, res, next) => {
+
+    const {comment} = req.body
+  
+    Review.findByIdAndUpdate(
+        req.params.commentsId,
+        {
+          comment
+        },
+        {new: true}
+    )
+    .then((updatedReview) => {
+        res.redirect(`/forum/details/${updatedReview.topic._id}`)
+    })
+    .catch((err) => {
+        console.log(err)
+        next(err)
+    })
+  
+  })
+
 module.exports = router;

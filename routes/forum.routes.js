@@ -105,7 +105,7 @@ router.get('/details/:topicId', (req, res, next) => {
       const userIsOwner = foundTopic.creator._id.toString() === req.session.user._id;
       const reviewOfOwner = foundTopic.reviews.filter((review) => review.user._id.toString() === req.session.user._id);
       const reviewOfNotOwner = foundTopic.reviews.filter((review) => review.user._id.toString() !== req.session.user._id);
-      res.render('users/forum-details.hbs', {foundTopic, user: req.session.user, userIsOwner, reviewOfOwner, reviewOfNotOwner })
+      res.render('users/forum-details.hbs', {foundTopic, user: req.session.user, userIsOwner, reviewOfOwner, reviewOfNotOwner})
   })
   .catch((err) => {
       console.log(err)
@@ -113,6 +113,7 @@ router.get('/details/:topicId', (req, res, next) => {
   })
 
 })
+
 
 
 module.exports = router;

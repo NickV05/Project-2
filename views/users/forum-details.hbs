@@ -26,16 +26,13 @@
 {{#if foundTopic.reviews}}
 
     {{#each reviewOfOwner}}
-
         <p>{{comment}}</p>
         <h5><img id = "userAv" src="/images/{{user.avatar}}" alt="picture"> {{user.fullName}}</h5>
         <hr>
-
+        
         <a href="/comments/edit/{{_id}}">Edit Comment</a>
         <a href="/comments/delete/{{_id}}">Delete Comment</a>
-
     {{/each}}
-
 
     {{#each reviewOfNotOwner}}
 
