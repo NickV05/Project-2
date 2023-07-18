@@ -103,13 +103,24 @@ router.post('/logout', (req, res, next) => {
 });
 
 router.get("/userProfile/:userID", isLoggedIn, (req, res) => {
-const { username, password, reviews, discussions } = req.session.user;
-console.log(req.session.user)
-if(!req.session.user.avatar){
-  req.session.user.avatar = 'vector.png'
-}
+
 const registered = new Date(`${req.session.user.createdAt}`).toLocaleDateString();
-  res.render('users/user-profile.hbs', {user: req.session.user, registered});
+
+User.findById(req.params.userID)
+  .populate('discussions')
+  .populate('reviews')
+  .then((foundUser) => {
+    if(!foundUser.avatar){
+      foundUser.avatar = 'vector.png'
+    }
+    console.log("user info",foundUser)
+    res.render('users/user-profile.hbs', {foundUser, registered});
+  })
+  .catch((err) => {
+    console.log("Error", err)
+    next(err)
+  })
+
 });
 
 router.post("/userProfile/:userID", isLoggedIn, (req, res) => {

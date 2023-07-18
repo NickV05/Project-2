@@ -1,19 +1,19 @@
-{{#if user}}
+{{#if foundUser}}
 <div id = "profileDiv">
   <h2>Edit Profile</h2>
 
-<form id = "profileDiv" action="/auth/userProfile/{{user._id}}" method="POST">
-    <img id = "userAv" src="/images/{{user.avatar}}" alt="picture">
+<form id = "profileDiv" action="/auth/userProfile/{{foundUser._id}}" method="POST">
+    <img id = "userAv" src="/images/{{foundUser.avatar}}" alt="picture">
     <label for="avatar">Avatar</label>
     <input type="file" name="avatar" id="avatar">
 
     <label for="name">Full Name</label>
-    <input id="name" type="text" name="fullName" value="{{user.fullName}}">
+    <input id="name" type="text" name="fullName" value="{{foundUser.fullName}}">
 
     <label for="username">Username</label>
-    <input id="username" type="text" name="username"value="{{user.username}}">
+    <input id="username" type="text" name="username"value="{{foundUser.username}}">
 
-    <p>Employee: {{user.employee}}</p>
+    <p>Employee: {{foundUser.employee}}</p>
 
     <p>Registered: {{registered}}</p>
     <button type="submit">Update Information</button>

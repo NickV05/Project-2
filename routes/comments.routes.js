@@ -14,27 +14,31 @@ router.post('/add-review/:topicId', (req, res, next) => {
     })
     .then((newReview) => {
         console.log("New review", newReview)
-        return Topic.findByIdAndUpdate(
+        Topic.findByIdAndUpdate(
             req.params.topicId,
             {
                 $push: {reviews: newReview._id}
             },
             {new: true}
-        )
-    })
-    .then((addToUser) => {
-        console.log("Adding review to profile", addToUser)
-        return User.findByIdAndUpdate(
-            req.session.user._id,
-            {
-                $push: {reviews: addToUser._id}
-            },
-            {new: true}
-        )
-    })
-    .then((updatedTopic) => {
-        console.log("Updated topic", updatedTopic)
-        res.redirect(`/forum/details/${req.params.topicId}`)
+        ).then(() => {
+            User.findByIdAndUpdate(
+                req.session.user._id,
+                {
+                    $push: {reviews: newReview._id}
+                },
+                {new: true}
+                ).then(() =>{
+                    res.redirect(`/forum/details/${req.params.topicId}`)
+                })
+                .catch((err) => {
+                    console.log(err)
+                    next(err)
+                })
+        
+        }).catch((err) => {
+            console.log(err)
+            next(err)
+        })
     })
     .catch((err) => {
         console.log(err)
