@@ -167,113 +167,113 @@ padding-top:55px;
   }
 
 #miami{
-  position: relative;
+  position: absolute;
   width:20px;
   height:20px;
-  top:162px;
-  left:165px;
+  top:380px;
+  left:625px;
 }
 
 #racoon{
-  position: relative;
+  position: absolute;
   width:20px;
   height:20px;
-  top:140px;
-  left:125px;
+  top:360px;
+  left:612px;
 }
 
 #denver{
-  position: relative;
+  position: absolute;
   width:20px;
   height:20px;
-  top:135px;
-  left:70px;
+  top:355px;
+  left:580px;
 }
 
 #mexico{
-  position: relative;
+  position: absolute;
   width:20px;
   height:20px;
-  top:167px;
-  left:53px;
+  top:392px;
+  left:588px;
 }
 
 #catarina{
-  position: relative;
+  position: absolute;
   width:20px;
   height:20px;
-  top:270px;
-  left:125px;
+  top:490px;
+  left:680px;
 }
 
 #brasil{
-  position: relative;
+  position: absolute;
   width:20px;
   height:20px;
-  top:250px;
-  left:94px;
+  top:467px;
+  left:685px;
 }
 
 #lyon{
-  position: relative;
+  position: absolute;
   width:20px;
   height:20px;
-  top:117px;
-  left:185px;
+  top:340px;
+  left:785px;
 }
 #berlin{
-  position: relative;
+  position: absolute;
   width:20px;
   height:20px;
-  top:108px;
-  left:178px;
+  top:330px;
+  left:804px;
 }
 
 #kyiv{
-  position: relative;
+  position: absolute;
   width:20px;
   height:20px;
-  top:110px;
-  left:185px;
+  top:332px;
+  left:840px;
 }
 
 #cape{
-  position: relative;
+  position: absolute;
   width:20px;
   height:20px;
-  top:276px;
-  left:43px;
+  top:498px;
+  left:812px;
 }
 
 #delhi{
-  position: relative;
+  position: absolute;
   width:20px;
   height:20px;
-  top:160px;
-  left:180px;
+  top:388px;
+  left:926px;
 }
 #shanghai{
-  position: relative;
+  position: absolute;
   width:20px;
   height:20px;
-  top:155px;
-  left:280px;
+  top:375px;
+  left:1005px;
 }
 
 #tokyo{
-  position: relative;
+  position: absolute;
   width:20px;
   height:20px;
-  top:140px;
-  left:345px;
+  top:360px;
+  left:1045px;
 }
 
 #sydney{
-  position: relative;
+  position: absolute;
   width:20px;
   height:20px;
-  top:280px;
-  left:385px;
+  top:498px;
+  left:1060px;
 }
 
 .umbrellaImg2{
@@ -305,16 +305,17 @@ padding-top:55px;
   font-size: 20px;
   font-weight: bolder;
   }
+  
 
-  #tours ul button{
+  #tours ul li{
   background: white;
   color:black;
-  
-  font-weight: bold;
   border: none;
+  border-bottom: 1px solid white;
+  font-weight: bold;
   }
 
-  #tours ul button:hover{
+  #tours ul li:hover{
     border-bottom: 1px solid rgb(94, 171, 234);
     
     font-weight: bold;
@@ -420,4 +421,11 @@ padding-top:55px;
       #discussionView{
         display: flex;
         justify-content: space-around;
+      }
+
+      @keyframes do{
+        15%{
+          transform: scale(1.5);
+          
+        }
       }
