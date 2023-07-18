@@ -106,7 +106,7 @@ router.get("/userProfile/:userID", isLoggedIn, (req, res) => {
 const { username, password } = req.session.user;
 
 if(!req.session.user.avatar){
-  req.session.user.avatar = '/images/vector.png'
+  req.session.user.avatar = 'vector.png'
 }
   res.render('users/user-profile.hbs', {user: req.session.user});
 });
