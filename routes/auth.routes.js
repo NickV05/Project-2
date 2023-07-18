@@ -108,7 +108,8 @@ console.log(req.session.user)
 if(!req.session.user.avatar){
   req.session.user.avatar = 'vector.png'
 }
-  res.render('users/user-profile.hbs', {user: req.session.user});
+const registered = new Date(`${req.session.user.createdAt}`).toLocaleDateString();
+  res.render('users/user-profile.hbs', {user: req.session.user, registered});
 });
 
 router.post("/userProfile/:userID", isLoggedIn, (req, res) => {

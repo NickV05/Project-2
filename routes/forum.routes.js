@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const User = require("../models/User.model")
 const Topic = require("../models/Topic.model")
 const router = new Router()
+const { DateTime } = require("luxon")
 
 
 const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
@@ -135,7 +136,32 @@ router.get('/details/:topicId', (req, res, next) => {
       const reviewOfOwner = foundTopic.reviews.filter((review) => review.user._id.toString() === req.session.user._id);
       const reviewOfNotOwner = foundTopic.reviews.filter((review) => review.user._id.toString() !== req.session.user._id);
       const updateTime = foundTopic.createdAt.toString() != foundTopic.updatedAt.toString();
-      res.render('users/forum-details.hbs', {foundTopic, user: req.session.user, userIsOwner, reviewOfOwner, reviewOfNotOwner, updateTime})
+      const createdDate = new Date(`${foundTopic.createdAt}`).toLocaleDateString(); 
+      const createdTime =new Date(`${foundTopic.createdAt}`).toLocaleTimeString();
+      const updDate = new Date(`${foundTopic.updatedAt}`).toLocaleDateString(); 
+      const updTime =new Date(`${foundTopic.updatedAt}`).toLocaleTimeString();
+
+      let reviewOfOwner1 = reviewOfOwner.map((review) => {
+        return {...review._doc, createdAt: review.createdAt.toLocaleDateString(), time: review.createdAt.toLocaleTimeString(),
+          updatedAt: review.updatedAt.toLocaleDateString(), timeUpdated: review.updated.toLocaleTimeString(), }
+      });
+      let reviewOfNotOwner1 = reviewOfNotOwner.map((review) => {
+        return {...review._doc, createdAt: review.createdAt.toLocaleDateString(), time: review.createdAt.toLocaleTimeString()}
+      });
+      
+      
+      res.render('users/forum-details.hbs', {
+        foundTopic, 
+        user: req.session.user, 
+        userIsOwner, 
+        reviewOfOwner1, 
+        reviewOfNotOwner1, 
+        createdDate, 
+        createdTime,
+        updateTime,
+        updDate,
+        updTime,
+      })
   })
   .catch((err) => {
       console.log(err)

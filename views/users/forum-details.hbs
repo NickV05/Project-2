@@ -6,9 +6,9 @@
     <p id ="contentText">{{foundTopic.content}}</p>
     <br>
     <p id = "authorText">Author:<img id = "authorAv" src="/images/{{foundTopic.creator.avatar}}" alt="picture"> <p id = "authorText2">{{foundTopic.creator.fullName}}</p></p>
-    <p>Created at {{foundTopic.createdAt}}</p>
+    <p class = "date">Created {{createdDate}} at {{createdTime}}</p>
     {{#if updateTime}}
-    <p>Updated at {{foundTopic.updatedAt}}</p>
+    <p class = "date">Updated {{updDate}} at {{updTime}}</p>
     {{/if}}
     {{#if userIsOwner}}
     <div id = "authorOptions">
@@ -31,9 +31,13 @@
 
 {{#if foundTopic.reviews}}
 
-    {{#each reviewOfOwner}}
+    {{#each reviewOfOwner1}}
         <textarea cols="40" rows="5">{{comment}}</textarea>
         <h5><img id = "userAv" src="/images/{{user.avatar}}" alt="picture"> You</h5>
+        <p class = "date">Created {{createdAt}} at {{time}}</p>
+        {{#if updateTimeRev}}
+        <p class = "date">Updated {{updDateRev}} at {{updTimeRev}}</p>
+        {{/if}}
         <hr>
         
         <a href="/comments/edit/{{_id}}">Edit Comment</a>
@@ -44,6 +48,10 @@
 
         <textarea cols="40" rows="5">{{comment}}</textarea>
         <h5><img id = "userAv" src="/images/{{user.avatar}}" alt="picture"> {{user.fullName}}</h5>
+         <p class = "date">Created {{createdAt}} at {{time}}</p>
+        {{#if updateTimeRev}}
+        <p class = "date">Updated {{ updatedAt}} at {{timeUpdated}}</p>
+        {{/if}}
         <hr>
 
     {{/each}}
