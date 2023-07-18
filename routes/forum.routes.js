@@ -94,6 +94,10 @@ router.get('/details/:topicId', (req, res, next) => {
 
   Topic.findById(req.params.topicId)
   .populate('creator')
+  .populate({
+    path: 'reviews',
+    populate: { path: 'user' },
+})
   .then((foundTopic) => {
       console.log("Found Topic", foundTopic)
       const userIsOwner = foundTopic.creator._id.toString() === req.session.user._id;

@@ -1,13 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-// const Review = require('../models/Review');
-// const Room = require('../models/Room');
+const Review = require('../models/Review.model');
+const Topic = require('../models/Topic.model');
 
-// const isLoggedIn = require('../middleware/isLoggedIn')
-// const isNotOwner = require('../middleware/isNotOwner')
-
-router.post('/add-review/:ownerId/:roomId', (req, res, next) => {
+router.post('/add-review/:topicId', (req, res, next) => {
 
     Review.create({
         user: req.session.user._id,
@@ -15,17 +12,17 @@ router.post('/add-review/:ownerId/:roomId', (req, res, next) => {
     })
     .then((newReview) => {
         console.log("New review", newReview)
-        return Room.findByIdAndUpdate(
-            req.params.roomId,
+        return Topic.findByIdAndUpdate(
+            req.params.topicId,
             {
                 $push: {reviews: newReview._id}
             },
             {new: true}
         )
     })
-    .then((updatedRoom) => {
-        console.log("Updated room", updatedRoom)
-        res.redirect(`/rooms/details/${updatedRoom._id}`)
+    .then((updatedTopic) => {
+        console.log("Updated topic", updatedTopic)
+        res.redirect(`/forum/details/${updatedTopic._id}`)
     })
     .catch((err) => {
         console.log(err)

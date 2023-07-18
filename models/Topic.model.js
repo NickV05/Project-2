@@ -4,7 +4,8 @@ const { link } = require('../routes');
 const topicSchema = new Schema({
     creator: { type: Schema.Types.ObjectId, ref: "User" },
     topicName: { type: String, maxlength: 77 },
-    content: { type: String}
+    content: { type: String},
+    reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }]
   });
  
 module.exports = model('Topic', topicSchema);
