@@ -24,7 +24,19 @@
 
 {{#if foundTopic.reviews}}
 
-    {{#each foundTopic.reviews}}
+    {{#each reviewOfOwner}}
+
+        <p>{{comment}}</p>
+        <h5><img id = "userAv" src="{{user.avatar}}" alt="picture"> {{user.fullName}}</h5>
+        <hr>
+
+        <a href="/forum/edit/{{foundTopic._id}}">Edit Comment</a>
+        <a href="/forum/delete/{{foundTopic._id}}">Delete Comment</a>
+
+    {{/each}}
+
+
+    {{#each reviewOfNotOwner}}
 
         <p>{{comment}}</p>
         <h5><img id = "userAv" src="{{user.avatar}}" alt="picture"> {{user.fullName}}</h5>
