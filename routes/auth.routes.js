@@ -119,7 +119,7 @@ router.post("/userProfile/:userID", isLoggedIn, (req, res) => {
         {
             fullName,
             username,
-            avatar:"vector.png"
+            avatar:req.session.user.avatar
         },
         {new: true}
     )
