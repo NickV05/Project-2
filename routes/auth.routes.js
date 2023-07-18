@@ -113,7 +113,27 @@ if(!req.session.user.avatar){
 
 router.post("/userProfile/:userID", isLoggedIn, (req, res) => {
   const { fullName, avatar, username} = req.body
-
+  if(avatar == ""){
+    User.findByIdAndUpdate(
+      req.params.userID,
+        {
+            fullName,
+            username,
+            avatar:"vector.png"
+        },
+        {new: true}
+    )
+    .then((updatedUser) => {
+      console.log("line 127:", updatedUser)
+      req.session.user = updatedUser
+      res.redirect(`/auth/userProfile/${updatedUser._id}`);
+    })
+    .catch((err) => {
+        console.log(err)
+        next(err)
+    })
+  }
+  else{
     User.findByIdAndUpdate(
       req.params.userID,
         {
@@ -132,7 +152,7 @@ router.post("/userProfile/:userID", isLoggedIn, (req, res) => {
         console.log(err)
         next(err)
     })
-
+  }
   });
 
 module.exports = router;
