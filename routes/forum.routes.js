@@ -29,6 +29,16 @@ router.get('/', (req,res,next) => {
        creator: req.session.user._id,
        photo:"topic.jpg"
     })
+    .then((addToUser) => {
+      console.log("Adding topic to profile", addToUser)
+      return User.findByIdAndUpdate(
+          req.session.user._id,
+          {
+              $push: {discussions: addToUser._id}
+          },
+          {new: true}
+      )
+  })
     .then((createdTopic) => {
         console.log("Created Topic:", createdTopic)
         res.redirect('/forum')

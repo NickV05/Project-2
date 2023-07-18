@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+const User = require('../models/User.model');
 const Review = require('../models/Review.model');
 const Topic = require('../models/Topic.model');
 
@@ -21,9 +22,19 @@ router.post('/add-review/:topicId', (req, res, next) => {
             {new: true}
         )
     })
+    .then((addToUser) => {
+        console.log("Adding review to profile", addToUser)
+        return User.findByIdAndUpdate(
+            req.session.user._id,
+            {
+                $push: {reviews: addToUser._id}
+            },
+            {new: true}
+        )
+    })
     .then((updatedTopic) => {
         console.log("Updated topic", updatedTopic)
-        res.redirect(`/forum/details/${updatedTopic._id}`)
+        res.redirect(`/forum/details/${req.params.topicId}`)
     })
     .catch((err) => {
         console.log(err)

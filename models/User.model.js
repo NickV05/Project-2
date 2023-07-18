@@ -24,7 +24,9 @@ const userSchema = new Schema(
     employee: {
       type: String,
       default: 'No'
-    }
+    },
+    reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
+    discussions: [{ type: Schema.Types.ObjectId, ref: "Topic" }]
   },
   {
     timestamps: true
