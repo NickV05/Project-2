@@ -53,12 +53,12 @@ router.get('/edit/:topicId',isLoggedIn, (req, res, next) => {
 
 })
 
-router.post('/edit/:topicId', isLoggedIn, (req, res, next) => {
+router.post('/edit/:topicId', (req, res, next) => {
 
   const {topicName, content } = req.body
 
   Topic.findByIdAndUpdate(
-      req.params.roomId,
+      req.params.topicId,
       {
         topicName,
         content,
@@ -66,7 +66,7 @@ router.post('/edit/:topicId', isLoggedIn, (req, res, next) => {
       {new: true}
   )
   .then((updatedTopic) => {
-      res.redirect(`/topic/details/${updatedRoom._id}`)
+      res.redirect(`/forum/details/${updatedTopic._id}`)
   })
   .catch((err) => {
       console.log(err)
@@ -101,6 +101,7 @@ router.get('/details/:topicId', (req, res, next) => {
   .then((foundTopic) => {
       console.log("Found Topic", foundTopic)
       const userIsOwner = foundTopic.creator._id.toString() === req.session.user._id;
+      const userCommentor = 
       res.render('users/forum-details.hbs', {foundTopic, user: req.session.user, userIsOwner})
   })
   .catch((err) => {

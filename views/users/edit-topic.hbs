@@ -1,6 +1,6 @@
 <div class = "forumDiv">
          <h2>Edit your topic</h2>
-        <form class = "forumDiv" action="/forum/edit" method="POST">
+        <form class = "forumDiv" action="/forum/edit/{{foundTopic._id}}" method="POST">
         <label> Topic Name
         <textarea id = "topic"  cols="40" rows="5" name="topicName" >{{foundTopic.topicName}}</textarea>
         </label>
@@ -8,7 +8,7 @@
         <label> Content
         <textarea id = "content"  cols="40" rows="5" name="content">{{foundTopic.content}}</textarea>
         </label>
-        <button type="submit">Create Topic</button>
+        <button type="submit">EDIT Topic</button>
         {{#if errorMessage}}
         <p class="error">{{errorMessage}}</p>
     {{/if}}
