@@ -58,10 +58,5 @@ window.onload = () => {
         const [buttonId, divId] = pair;
         setupButtonAnimation(buttonId, divId);
     });
-
-
-
-
-
-
+    
 }

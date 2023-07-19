@@ -37,7 +37,7 @@ router.post('/validate', (req, res, next) => {
                 console.log("Updated employee field", req.session.user.employee)
                 console.log("isEmployee:",isEmployee)
                 console.log("level:",level)
-                res.render("auth/indexEmployee.hbs",{user:req.session.user, isEmployee, level})
+                res.render("auth/indexEmployee.hbs",{user:req.session.user, isEmployee, level, title: "Employees"})
             })
             .catch(error => next(error));
         }

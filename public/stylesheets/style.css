@@ -1,5 +1,6 @@
 body {
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+  margin: 0;
 }
  
 #form-auth {
@@ -86,9 +87,8 @@ form button:hover {
 .navBar {
   border-bottom: 2px solid brown;
   height: 30px;
-  padding: 1em 0;
-  margin-left: 2.5vw;
-  margin-right: 2.5vw;
+  margin: 0;
+  padding: 1em 2em 1em 2em;
   list-style-type: none;
   display: flex;
   justify-content: space-between;
@@ -113,7 +113,6 @@ form button:hover {
   justify-content:space-around;
 }
  
- 
 #form h2 {
   display: flex;
   justify-content: center;
@@ -126,12 +125,11 @@ form button:hover {
   display: flex;
 }
  
-#logout-form {
+.logout-form {
   display: inline;
 }
-
  
-#logout-form button {
+.logout-form button {
   width: 120px;
 }
 
@@ -767,4 +765,23 @@ padding-top:55px;
           align-items: center;
           gap:15px;
         }
+
+        .back-black {
+          background-color: black;
+          margin: 0;
+        }
+
+        .back-white { 
+          background-color: white;
+        }
+
+        .employeePage{
+          background-image: url("../images/employee.jpg");
+          background-size: cover;
+          width:100vw;
+          height:91.5vh;
+        }
+
+
+    
         

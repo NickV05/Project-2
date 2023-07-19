@@ -1,11 +1,16 @@
 <head>
-    <title>Umbrella Corporation</title>
+    <title>Umbrella Corporation: {{title}}</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <link rel="" href="/middleware/route-guard.js">
   </head>
 
 <body>
-    <nav>
+  {{#if level}}
+    <nav class="back-black">
+  {{/if}}
+  {{#unless level}}
+    <nav class = "back-white">
+  {{/unless}}
       <ul class = "navBar">
         <li id="to-left">
           <form id="logout-form" action="/" method="GET">
@@ -26,21 +31,23 @@
         <h2>Welcome {{ user.fullName }}!</h2>
         
 
-          <form id="logout-form" action="/auth/userProfile/{{user._id}}" method="GET">
+          <form class="logout-form" action="/auth/userProfile/{{user._id}}" method="GET">
           <button>Profile</button>
           </form>
 
-          <form id="logout-form" action="/forum" method="GET">
+          <form class="logout-form" action="/forum" method="GET">
           <button>Forum</button>
           </form>
 
-          <form id="logout-form" action="/auth/logout" method="POST">
+          <form class="logout-form" action="/auth/logout" method="POST">
           <button>Logout</button>
           </form>
 
-          <form id="logout-form" action="/authorization/validate" method="POST">
+          {{#unless isEmployee}}
+          <form action="/authorization/validate" method="POST">
           <input type="text" name="number" placeholder="Employee ID#" />
           </form>
+          {{/unless}}
 
         
         {{/if}}
