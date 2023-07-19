@@ -1,10 +1,15 @@
 {{#if foundUser}}
 <div id = "profileDiv">
   <div id ="formBox">
+    {{#if myProfile}}
   <h2>Edit Profile</h2>
+    {{else}}
+  <h2>Profile of {{foundUser.fullName}}</h2>
+    {{/if}}
 
+    {{#if myProfile}}
   <form id = "editProf" action="/auth/userProfile/{{foundUser._id}}" method="POST">
-      <img id = "userAv" src="/images/{{foundUser.avatar}}" alt="picture">
+      <img class = "userAv" src="/images/{{foundUser.avatar}}" alt="picture">
       <label for="avatar">Avatar</label>
       <input type="file" name="avatar" id="avatar">
 
@@ -20,13 +25,26 @@
       <button type="submit">Update Information</button>
 
   </form>
+    {{else}}
+      <img class = "userAv" src="/images/{{foundUser.avatar}}" alt="picture">
+      <h4>Full Name: {{foundUser.fullName}}</h4>
+      <h4>Username: {{foundUser.username}}</h4>
+      <h4>Employee: {{foundUser.employee}}</h4>
+      <h4>Registered: {{registered}}</h4>
+    {{/if}}
 
   </div>
+
+
 {{#if foundUser.discussions}}
   <div id ="box">
     
     <div id ="part1">
+      {{#if myProfile}}
       <p class = "nameField">Your discussions:</p>
+      {{else}}
+      <p class = "nameField">Discussions of {{foundUser.fullName}}</p>
+      {{/if}}
     <div id = "discussionBox">
       {{#each foundUser.discussions}}
       <div id ="imagBox">
@@ -38,12 +56,20 @@
     </div>
     </div>
     {{else}}
+    {{#if myProfile}}
     <p class = "nothing">You have no created discussions</p>
+    {{else}}
+    <p class = "nothing">{{foundUser.fullName}} has no created discussions</p>
+    {{/if}}
   {{/if}}
 
   {{#if foundUser.reviews}}
     <div id = "commentsBox">
+      {{#if myProfile}}
       <p class = "nameField">Your Comments:</p>
+      {{else}}
+      <p class = "nameField">Comments of {{foundUser.fullName}}</p>
+      {{/if}}
     {{#each foundUser.reviews}}
       <textarea id ="comments">{{comment}}</textarea>
       <a class="goTo" href="/forum/details/{{topic}}">Go to the review</a>
@@ -54,7 +80,11 @@
 
 </div>
   {{else}}
-  <p class = "nothing">No posted reviews yet</p>
+    {{#if myProfile}}
+    <p class = "nothing">You have no posted reviews</p>
+    {{else}}
+    <p class = "nothing">{{foundUser.fullName}} has posted reviews</p>
+    {{/if}}
   {{/if}}
   
 {{else}}

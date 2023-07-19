@@ -11,7 +11,7 @@ router.get('/', (req,res,next) => {
   Topic.find()
     .populate('creator')
     .then((foundTopics) => {
-        console.log(foundTopics)       
+        console.log(foundTopics)          
         res.render('users/forum.hbs', { topics: foundTopics, user: req.session.user })
     })
     .catch((err) => {
@@ -23,6 +23,14 @@ router.get('/', (req,res,next) => {
   router.post('/createTopic', isLoggedIn, (req, res, next) => {
 
     const {topicName, content} = req.body
+
+    if (!topicName|| !content) {
+      Topic.find()
+      .then((topics) =>{
+        res.render('users/forum.hbs', { topics, errorMessage: 'All fields are mandatory. Please provide name for topic and your question', user:req.session.user });
+      })
+      return;
+    }
 
     Topic.create({
        topicName,

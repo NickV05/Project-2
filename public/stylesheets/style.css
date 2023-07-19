@@ -80,6 +80,7 @@ form button:hover {
   margin: 20px auto;
   padding: 20px;
   width: 100%;
+  text-align: center;
 }
  
 .navBar {
@@ -342,7 +343,10 @@ padding-top:55px;
     align-items: center;
     justify-content: center;
     margin-left: 200px;
-    
+  }
+
+  #formBox h2{
+    width:250px;
   }
 
   #box{
@@ -389,7 +393,7 @@ padding-top:55px;
     align-items: center;
   }
 
-  #userAv{
+  .userAv{
     height:100px;
     width:100px;
     border: 2.5px solid black;
@@ -428,6 +432,7 @@ padding-top:55px;
     border: 1px solid black;
     text-decoration: none;
     height:20px;
+    width:115px;
     border-radius: 4px;
     transition: 0.3s ease background;
   }
@@ -451,6 +456,15 @@ padding-top:55px;
     justify-content: flex-start;
     align-items: center;
     width:200px;
+  }
+
+  .forumDiv2{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width:200px;
+    margin-top:6px
   }
 
   #content{
@@ -583,6 +597,14 @@ padding-top:55px;
         text-align: center;
         font-family:Verdana, Geneva, Tahoma, sans-serif;
         font-weight: bold;
+      }
+
+      .red{
+        color: brown;
+      }
+
+      #authorText2 a {
+        color: brown;
       }
 
       #authorAv{

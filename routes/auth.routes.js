@@ -104,7 +104,6 @@ router.post('/logout', (req, res, next) => {
 
 router.get("/userProfile/:userID", isLoggedIn, (req, res) => {
 
-const registered = new Date(`${req.session.user.createdAt}`).toLocaleDateString();
 
 User.findById(req.params.userID)
   .populate('discussions')
@@ -113,8 +112,13 @@ User.findById(req.params.userID)
     if(!foundUser.avatar){
       foundUser.avatar = 'vector.png'
     }
+    const registered = new Date(`${foundUser.createdAt}`).toLocaleDateString();
+    console.log("User in Session:",req.session.user)
+    console.log("Profile of User:", foundUser)
+    const myProfile = req.session.user._id == foundUser._id.toString();
+    console.log("myProfile", myProfile)
     console.log("user info",foundUser)
-    res.render('users/user-profile.hbs', {foundUser, registered, user:req.session.user});
+    res.render('users/user-profile.hbs', {foundUser, registered, myProfile, user:req.session.user});
   })
   .catch((err) => {
     console.log("Error", err)

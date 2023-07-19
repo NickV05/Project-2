@@ -5,7 +5,7 @@
     <img id = "topicImg2" src="/images/{{foundTopic.photo}}" alt="topicPhoto">
     <p id ="contentText">{{foundTopic.content}}</p>
     <br>
-    <p id = "authorText">Author:<img id = "authorAv" src="/images/{{foundTopic.creator.avatar}}" alt="picture"> <p id = "authorText2">{{foundTopic.creator.fullName}}</p></p>
+    <p id = "authorText">Author:<img id = "authorAv" src="/images/{{foundTopic.creator.avatar}}" alt="picture"> <p id = "authorText2"><a href="/auth/userProfile/{{foundTopic.creator._id}}">{{foundTopic.creator.fullName}}</a></p></p>
     <p class = "date">Created {{createdDate}} at {{createdTime}}</p>
     {{#if updateTime}}
     <p class = "date">Updated {{updDate}} at {{updTime}}</p>
@@ -27,7 +27,11 @@
 
     <button type="submit" >Submit</button>
 
-</form>
+    {{#if errorMessage}}
+    <p class = "error">Please provide your question</p>
+    {{/if}}
+
+    </form>
 
 {{#if foundTopic.reviews}}
 
@@ -41,7 +45,7 @@
             </div>
 
             <div class ="dateInfo">
-             <h5>You</h5>
+             <h5><a class = "red" href="/auth/userProfile/{{user._id}}">{{user.fullName}}</a></h5>
              <p class = "date">Created {{createdAt}} at {{time}}</p>
              <p class = "date">Updated {{ updatedAt}} at {{timeUpdated}}</p>
             </div>
@@ -65,7 +69,7 @@
             </div>
 
             <div class ="dateInfo">
-             <h5>{{user.fullName}}</h5>
+             <h5><a class = "red" href="/auth/userProfile/{{user._id}}">{{user.fullName}}</a></h5>
              <p class = "date">Created {{createdAt}} at {{time}}</p>
              <p class = "date">Updated {{ updatedAt}} at {{timeUpdated}}</p>
             </div>

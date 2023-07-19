@@ -7,6 +7,53 @@ const Topic = require('../models/Topic.model');
 
 router.post('/add-review/:topicId', (req, res, next) => {
 
+    const {comment} = req.body
+
+    if (!comment) {
+        Topic.findById(req.params.topicId)
+        .populate('creator')
+        .populate({
+          path: 'reviews',
+          populate: { path: 'user' },
+      })
+        .then((foundTopic) => {
+            console.log("Found Topic", foundTopic)
+            const userIsOwner = foundTopic.creator._id.toString() === req.session.user._id;
+            const reviewOfOwner = foundTopic.reviews.filter((review) => review.user._id.toString() === req.session.user._id);
+            const reviewOfNotOwner = foundTopic.reviews.filter((review) => review.user._id.toString() !== req.session.user._id);
+            const updateTime = foundTopic.createdAt.toString() != foundTopic.updatedAt.toString();
+            const createdDate = new Date(`${foundTopic.createdAt}`).toLocaleDateString(); 
+            const createdTime =new Date(`${foundTopic.createdAt}`).toLocaleTimeString();
+            const updDate = new Date(`${foundTopic.updatedAt}`).toLocaleDateString(); 
+            const updTime =new Date(`${foundTopic.updatedAt}`).toLocaleTimeString();
+      
+            let reviewOfOwner1 = reviewOfOwner.map((review) => {
+              return {...review._doc, createdAt: review.createdAt.toLocaleDateString(), time: review.createdAt.toLocaleTimeString(),
+                updatedAt: review.updatedAt.toLocaleDateString(), timeUpdated: review.updatedAt.toLocaleTimeString()}
+            });
+            let reviewOfNotOwner1 = reviewOfNotOwner.map((review) => {
+              return {...review._doc, createdAt: review.createdAt.toLocaleDateString(), time: review.createdAt.toLocaleTimeString(),
+                updatedAt: review.updatedAt.toLocaleDateString(), timeUpdated: review.updatedAt.toLocaleTimeString(),}
+            });
+            
+            
+            res.render('users/forum-details.hbs', {
+            errorMessage: 'All fields are mandatory. Please provide name for topic and your question',
+              foundTopic, 
+              user: req.session.user, 
+              userIsOwner, 
+              reviewOfOwner1, 
+              reviewOfNotOwner1, 
+              createdDate, 
+              createdTime,
+              updateTime,
+              updDate,
+              updTime,
+            })
+        })
+      return;
+    }
+
     Review.create({
         topic: req.params.topicId,
         user: req.session.user._id,
