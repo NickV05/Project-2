@@ -3,7 +3,7 @@ const { link } = require('../routes');
 
 const reviewSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: "User" },
-    comment: { type: String},
+    comment: { type: String, required: [true, 'Write your comment.']},
     topic: { type: Schema.Types.ObjectId, ref: "Topic" },
   },
   {
