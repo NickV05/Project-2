@@ -2,6 +2,7 @@ const {Router} = require('express')
 const mongoose = require('mongoose')
 const User = require("../models/User.model")
 const Topic = require("../models/Topic.model")
+const Review = require("../models/Review.model")
 const router = new Router()
 
 const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
@@ -105,19 +106,22 @@ router.post('/edit/:topicId', (req, res, next) => {
 
 })
 
-router.get('/delete/:topicId', isLoggedIn, (req, res, next) => {
-  
-  Topic.findByIdAndDelete(req.params.topicId)
-  .then((deletedTopic) => {
-      console.log("Deleted topic:", deletedTopic)
-      res.redirect('/forum')
-  })
-  .catch((err) => {
-      console.log(err)
-      next(err)
-  })
-
-})
+router.get('/delete/:topicId', isLoggedIn, async (req, res, next) => {
+  try {
+    const topic = await Topic.findById(req.params.topicId);
+    console.log("Topic that is found:", topic);
+    for (const review of topic.reviews) {
+      console.log("Each review:", review);
+      await Review.findByIdAndDelete(review);
+    }
+    const deletedTopic = await Topic.findByIdAndDelete(req.params.topicId);
+    console.log("Deleted topic:", deletedTopic);
+    res.redirect('/forum');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 
 router.get('/details/:topicId', (req, res, next) => {
