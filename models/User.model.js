@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const { link } = require('../routes');
  
 const userSchema = new Schema(
   {
@@ -22,8 +21,8 @@ const userSchema = new Schema(
       default: 'vector.png',
     },
     employee: {
-      type: String,
-      default: 'No'
+      type: Boolean,
+      default: false
     },
     reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
     discussions: [{ type: Schema.Types.ObjectId, ref: "Topic" }]

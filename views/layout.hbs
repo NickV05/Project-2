@@ -26,7 +26,6 @@
         <h2>Welcome {{ user.fullName }}!</h2>
         
 
-
           <form id="logout-form" action="/auth/userProfile/{{user._id}}" method="GET">
           <button>Profile</button>
           </form>
@@ -39,8 +38,8 @@
           <button>Logout</button>
           </form>
 
-          <form id="logout-form" action="/auth/userProfile/{{user._id}}" method="POST">
-          <input type="text" name="employeeId" placeholder="Employee ID#" />
+          <form id="logout-form" action="/authorization/validate" method="POST">
+          <input type="text" name="number" placeholder="Employee ID#" />
           </form>
 
         

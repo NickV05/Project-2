@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const { link } = require('../routes');
 
 const reviewSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: "User" },

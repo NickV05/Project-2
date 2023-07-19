@@ -19,7 +19,12 @@
       <label for="username">Username</label>
       <input id="username" type="text" name="username"value="{{foundUser.username}}">
 
-      <p>Employee: {{foundUser.employee}}</p>
+      <p>Employee: 
+        {{#if foundUser.employee}}
+        Yes
+        {{else}}
+        No
+        {{/if}}</p>
 
       <p>Registered: {{registered}}</p>
       <button type="submit">Update Information</button>
@@ -29,7 +34,13 @@
       <img class = "userAv" src="/images/{{foundUser.avatar}}" alt="picture">
       <h4>Full Name: {{foundUser.fullName}}</h4>
       <h4>Username: {{foundUser.username}}</h4>
-      <h4>Employee: {{foundUser.employee}}</h4>
+      <h4>Employee: 
+        {{#if foundUser.employee}}
+        Yes
+        {{else}}
+        No
+        {{/if}}
+        </h4>
       <h4>Registered: {{registered}}</h4>
     {{/if}}
 

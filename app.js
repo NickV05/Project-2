@@ -12,6 +12,7 @@ var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth.routes');
 var forumRouter = require('./routes/forum.routes');
 var commentRouter = require('./routes/comments.routes');
+var authorizationRouter = require('./routes/authorization.routes');
 
 var app = express();
 
@@ -30,7 +31,7 @@ app.use(
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       secure: process.env.NODE_ENV === 'production',
       httpOnly: true,
-      maxAge: 1440000 
+      maxAge: 14400000 
     }, 
     store: MongoStore.create({
       mongoUrl: process.env.MONGODB_URI
@@ -48,6 +49,7 @@ app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/forum', forumRouter);
 app.use('/comments', commentRouter);
+app.use('/authorization', authorizationRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
