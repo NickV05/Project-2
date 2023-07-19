@@ -1,7 +1,9 @@
-
+<div class = "editReview">
        <form action="/comments/edit/{{foundReview._id}}" method="post">
-        <label> Your comment
+        <h3>Your comment</h3>
+        <label> 
         <textarea id = "comment"  cols="40" rows="5" name="comment">{{foundReview.comment}}</textarea>
         </label>
         <button type="submit">EDIT Comment</button>
         </form>
+</div>

@@ -33,12 +33,12 @@ router.get('/', (req,res,next) => {
     }
 
     Topic.create({
-       topicName,
-       content,
-       creator: req.session.user._id,
-       photo:"topic.jpg"
+      topicName,
+      content,
+      creator: req.session.user._id,
+      photo: "topic.jpg",
     })
-    .then((addToUser) => {
+       .then((addToUser) => {
       console.log("Adding topic to profile", addToUser)
       return User.findByIdAndUpdate(
           req.session.user._id,
@@ -52,10 +52,26 @@ router.get('/', (req,res,next) => {
         console.log("Created Topic:", createdTopic)
         res.redirect('/forum')
     })
-    .catch((err) => {
-        console.log(err)
-        next(err)
-    })
+    .catch((error) => {
+      console.error("Validation Error:", error, error.message);
+      console.log("Error", error);
+      if (error instanceof mongoose.Error.ValidationError) {
+        console.log("MONGOOSE ERROR");
+        Topic.find().then((topics) => {
+          res
+            .status(500)
+            .render("users/forum.hbs", {
+              topics,
+              errorMessage2: "Too many characters in topic name field",
+              user: req.session.user,
+            });
+        });
+        return;
+      }
+      console.log(error);
+      next(error);
+    });
+
 })
 
 router.get('/edit/:topicId',isLoggedIn, (req, res, next) => {

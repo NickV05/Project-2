@@ -113,7 +113,7 @@ router.get('/delete/:commentId', (req, res, next) => {
     .populate('user')
     .then((foundReview) => {
         console.log("Found Review", foundReview)
-        res.render("users/edit-review.hbs", {foundReview})
+        res.render("users/edit-review.hbs", {foundReview, user:req.session.user})
     })
     .catch((err) => {
         console.log(err)

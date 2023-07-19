@@ -15,6 +15,17 @@ window.onload = () => {
         element.style.border = "none";
         element.style.borderRadius = "";
     }
+
+    function applyAnimation2(element) {
+        audio1.play();
+        element.style.borderBottom =  "1px solid black";
+        element.style.transition= "0.3s ease background";
+    }
+    
+    function removeAnimation2(element) {
+        element.style.borderBottom = "1px solid white";
+        element.style.transition= "0.3s ease background";
+    }
     
     function setupButtonAnimation(buttonId, divId) {
         const button = document.getElementById(buttonId);
@@ -22,6 +33,8 @@ window.onload = () => {
     
         button.addEventListener('mouseover', () => applyAnimation(div));
         button.addEventListener('mouseout', () => removeAnimation(div));
+        div.addEventListener('mouseover', () => applyAnimation2(button));
+        div.addEventListener('mouseout', () => removeAnimation2(button));
     }
     
     const buttonDivPairs = [
@@ -45,4 +58,10 @@ window.onload = () => {
         const [buttonId, divId] = pair;
         setupButtonAnimation(buttonId, divId);
     });
+
+
+
+
+
+
 }

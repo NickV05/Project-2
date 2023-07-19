@@ -18,4 +18,4 @@ const isCreator = (req, res, next) => {
 
 }
 
-module.exports = isOwner
+module.exports = isCreator
