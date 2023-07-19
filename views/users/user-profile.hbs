@@ -1,29 +1,61 @@
 {{#if foundUser}}
 <div id = "profileDiv">
+  <div id ="formBox">
   <h2>Edit Profile</h2>
 
-<form id = "profileDiv" action="/auth/userProfile/{{foundUser._id}}" method="POST">
-    <img id = "userAv" src="/images/{{foundUser.avatar}}" alt="picture">
-    <label for="avatar">Avatar</label>
-    <input type="file" name="avatar" id="avatar">
+  <form id = "editProf" action="/auth/userProfile/{{foundUser._id}}" method="POST">
+      <img id = "userAv" src="/images/{{foundUser.avatar}}" alt="picture">
+      <label for="avatar">Avatar</label>
+      <input type="file" name="avatar" id="avatar">
 
-    <label for="name">Full Name</label>
-    <input id="name" type="text" name="fullName" value="{{foundUser.fullName}}">
+      <label for="name">Full Name</label>
+      <input id="name" type="text" name="fullName" value="{{foundUser.fullName}}">
 
-    <label for="username">Username</label>
-    <input id="username" type="text" name="username"value="{{foundUser.username}}">
+      <label for="username">Username</label>
+      <input id="username" type="text" name="username"value="{{foundUser.username}}">
 
-    <p>Employee: {{foundUser.employee}}</p>
+      <p>Employee: {{foundUser.employee}}</p>
 
-    <p>Registered: {{registered}}</p>
-    <button type="submit">Update Information</button>
+      <p>Registered: {{registered}}</p>
+      <button type="submit">Update Information</button>
 
-</form>
+  </form>
+
+  </div>
+{{#if foundUser.discussions}}
+  <div id ="box">
+    
+    <div id ="part1">
+      <p class = "nameField">Your discussions:</p>
+    <div id = "discussionBox">
+      {{#each foundUser.discussions}}
+      <div id ="imagBox">
+        <p id = "redBack">{{topicName}}</p>
+        <img id = "topPhoto"src="/images/{{photo}}" alt="photo">
+        <a class="goTo"href="/forum/details/{{_id}}">Go to the topic</a>
+      </div>
+      {{/each}}
+    </div>
+    </div>
+    {{else}}
+    <p class = "nothing">You have no created discussions</p>
+  {{/if}}
+
+  {{#if foundUser.reviews}}
+    <div id = "commentsBox">
+      <p class = "nameField">Your Comments:</p>
+    {{#each foundUser.reviews}}
+      <textarea id ="comments">{{comment}}</textarea>
+      <a class="goTo" href="/forum/details/{{topic}}">Go to the review</a>
+    {{/each}}
+   </div>
+
+  </div>
+
 </div>
-
-<div>
-
-</div>
+  {{else}}
+  <p class = "nothing">No posted reviews yet</p>
+  {{/if}}
   
 {{else}}
   

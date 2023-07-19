@@ -114,7 +114,7 @@ User.findById(req.params.userID)
       foundUser.avatar = 'vector.png'
     }
     console.log("user info",foundUser)
-    res.render('users/user-profile.hbs', {foundUser, registered});
+    res.render('users/user-profile.hbs', {foundUser, registered, user:req.session.user});
   })
   .catch((err) => {
     console.log("Error", err)

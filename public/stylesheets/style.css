@@ -324,16 +324,126 @@ padding-top:55px;
 
   #profileDiv{
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    width:98vw;
+  }
+  #editProf{
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
+  #formBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 200px;
+    
+  }
+
+  #box{
+    display: flex;
+    align-items: space-around;
+    justify-content: space-around;
+    width:80%;
+    height:90%
+  }
+  #box div p{
+    text-align: center;
+  }
+
+  #redBack{
+    color: white;
+    background-color: black;
+    border-radius: 13%;
+  }
+
+  #part1{
+    width:70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #discussionBox{
+    width:100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #topPhoto{
+    width:110px;
+    height:90px;
+    border: 3px solid black;
+  }
+
+  #imagBox{
+    margin:15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+
   #userAv{
     height:100px;
     width:100px;
+    border: 2.5px solid black;
   }
 
+  .nameField{
+    background: #fff;
+    color: brown;
+    height: 26.8px;
+    border: 1px solid brown;
+    border-radius: 4px;
+    width:200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  #commentsBox{
+    width:250x;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #comments{
+    height: 60px;
+    margin-top: 30px;
+  }
+  .goTo{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: black;
+    border: 1px solid black;
+    text-decoration: none;
+    height:20px;
+    border-radius: 4px;
+    transition: 0.3s ease background;
+  }
+
+  .goTo:hover{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+    text-decoration: none;
+    height:20px;
+    border-radius: 4px;
+    transition: 0.3s ease background;
+  }
   .forumDiv{
     display: flex;
     flex-direction: column;
@@ -345,6 +455,11 @@ padding-top:55px;
   #content{
     height:100px;
     width:100%
+  }
+
+  .nothing{
+    margin-right: 50px;
+    font-weight: bold;
   }
 
   #topic{
@@ -612,3 +727,5 @@ padding-top:55px;
           text-align: center;
           font-weight: bold;
         }
+
+        
