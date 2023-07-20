@@ -1,8 +1,7 @@
 const {Router} = require('express')
 const mongoose = require('mongoose')
 const User = require("../models/User.model")
-const Topic = require("../models/Topic.model")
-const Review = require("../models/Review.model")
+const Virus = require("../models/Virus.model")
 const EmployeeModel = require('../models/Employee.model')
 const router = new Router()
 
@@ -33,15 +32,27 @@ router.post('/validate', (req, res, next) => {
                 $set: {employee: true}
             },
             {new: true}
-            ).then(() =>{
+            )
+          .then(() =>{
+           return Virus.find()
+          })
+          .then((viruses) =>{
                 console.log("Updated employee field", req.session.user.employee)
                 console.log("isEmployee:",isEmployee)
                 console.log("level:",level)
-                res.render("auth/indexEmployee.hbs",{user:req.session.user, isEmployee, level, title: "Employees"})
+                console.log("viruses:",viruses)
+                res.render("auth/indexEmployee.hbs",{user:req.session.user, isEmployee, level, employee, viruses})
             })
             .catch(error => next(error));
         }
       })
   });
+
+  router.get('/validation/virus/:virusId', (req,res,next) => {
+
+    res.render('auth/virus.hbs')
+  })
+
+
 
 module.exports = router;

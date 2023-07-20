@@ -1,11 +1,26 @@
 <div class="video-container">
-        <video id="fullscreen-video">
-            <source src="background-video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
         <video autoplay loop muted>
             <source src="../videos/Background.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
-        <h3>Your researches</h3>
+    <div class = "spreaded">
+        <h3 class ="whiteContent">
+            <p><img class="imgEmployee" src="../images/{{user.avatar}}" alt="corpEmblem"> <img class="imgEmployee" src="../images/umbrellacorp1.jpg" alt="corpEmblem"> </p>
+            <p>{{user.fullName}}</p>
+            <p>Position:{{employee.position}}</p>
+            <p>Clearence Level: {{employee.level}}</p>
+            <div id = "vertical">
+              <p>Serial No:</p> 
+              <img class="imgBarcode" src="../images/barcode.png" alt="barCode">
+            </div>
+        </h3>
+
+        <div class ="whiteContentRight">
+
+            <p>Your current projects:</p>
+            {{#each viruses}}
+            <a href="/authorization/validation/virus/{{_id}}">{{name}}  <img id = "first" src="../images/{{image}}" alt="cover"></a>
+            {{/each}}
+        </div>
+    </div>
 </div>
