@@ -20,14 +20,13 @@ router.post("/signup", (req, res, next) => {
         res.render('auth/signup', { errorMessage: 'All fields are mandatory. Please provide your username, full name and password.' });
         return;
       }
-
-  //     const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-  // if (!regex.test(password)) {
-  //   res
-  //     .status(500)
-  //     .render('auth/signup', { errorMessage: 'Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.' });
-  //   return;
-  // }
+      const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+  if (!regex.test(password)) {
+    res
+      .status(500)
+      .render('auth/signup', { errorMessage: 'Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.' });
+    return;
+  }
 
     bcrypt
       .genSalt(salt)

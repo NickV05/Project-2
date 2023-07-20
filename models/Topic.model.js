@@ -5,7 +5,7 @@ const topicSchema = new Schema({
     topicName: { type: String, maxlength: 30,required: [true, 'Topic name is required.']},
     content: { type: String, required: [true, 'Write your question.']},
     reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
-    photo: {type: String, default: null}
+    photo: {type: String}
   },
   {
     timestamps: true

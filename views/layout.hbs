@@ -1,14 +1,14 @@
 <head>
-    <title>Umbrella Corporation</title>
+    <title>Umbrella Corporation:{{title}}</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <link rel="" href="/middleware/route-guard.js">
   </head>
 
 <body>
-  {{#if level}}
+  {{#if title}}
     <nav class="back-black">
   {{/if}}
-  {{#unless level}}
+  {{#unless title}}
     <nav class = "back-white">
   {{/unless}}
       <ul class = "navBar">
@@ -31,23 +31,28 @@
         <h2>Welcome {{ user.fullName }}!</h2>
         
 
-          {{#unless level}}
+          {{#unless title}}
+
           <form class="logout-form" action="/auth/userProfile/{{user._id}}" method="GET">
           <button>Profile</button>
           </form>
           <form class="logout-form" action="/forum" method="GET">
           <button>Forum</button>
           </form>
+
           {{/unless}}
+
           <form class="logout-form" action="/auth/logout" method="POST">
           <button>Logout</button>
           </form>
 
-          {{#unless isEmployee}}
+          {{#unless title}}
+
           <form action="/authorization/validate" method="POST">
           <input type="password" name="number" placeholder="Employee ID#" />
           </form>
           {{/unless}}
+
 
         
         {{/if}}

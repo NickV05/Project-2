@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 const User = require("../models/User.model")
 const Virus = require("../models/Virus.model")
 const EmployeeModel = require('../models/Employee.model')
+const bcrypt = require("bcryptjs")
+const salt = 12;
 const router = new Router()
 
 router.post('/validate', (req, res, next) => {
@@ -10,11 +12,11 @@ router.post('/validate', (req, res, next) => {
     console.log("EmployeeID:",number)
 
     if (!number) {
-        res.render('index.hbs', { errorMessage: 'Please provide the employee id number' });
+        res.render('index.hbs', { errorMessage: 'Please provide the employee id number',user:req.session.user});
         return;
       }
       
-      EmployeeModel.findOne({ number })
+      EmployeeModel.findOne(bcrypt.compareSync(number))
       .then(employee => {
         console.log("Found employee:", employee)
         if (!employee) {
@@ -26,6 +28,7 @@ router.post('/validate', (req, res, next) => {
           console.log("Session AFTER AUTHORIZATION", req.session)
           const isEmployee = number == employee.number;
           const level = employee.level;
+          
           User.findByIdAndUpdate(
             req.session.user._id,
             {
@@ -41,7 +44,7 @@ router.post('/validate', (req, res, next) => {
                 console.log("isEmployee:",isEmployee)
                 console.log("level:",level)
                 console.log("viruses:",viruses)
-                res.render("auth/indexEmployee.hbs",{user:req.session.user, isEmployee, level, employee, viruses})
+                res.render("auth/indexEmployee.hbs",{user:req.session.user, isEmployee, level, employee, viruses, title:"Employees"})
             })
             .catch(error => next(error));
         }
@@ -49,10 +52,17 @@ router.post('/validate', (req, res, next) => {
   });
 
   router.get('/validation/virus/:virusId', (req,res,next) => {
-
-    res.render('auth/virus.hbs')
+    Virus.findById(req.params.virusId)
+    .then((foundVirus) => {
+      console.log(foundVirus)
+      res.render('auth/virus.hbs',{user:req.session.user,foundVirus,title:"Project Info"})
+    })
+    .catch((err) => {
+      console.log(err)
+      next(err)
+  })
   })
 
-
+   
 
 module.exports = router;

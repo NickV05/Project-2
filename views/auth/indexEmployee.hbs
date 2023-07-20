@@ -19,7 +19,10 @@
 
             <p>Your current projects:</p>
             {{#each viruses}}
-            <a href="/authorization/validation/virus/{{_id}}">{{name}}  <img id = "first" src="../images/{{image}}" alt="cover"></a>
+            <h5>{{name}}</h5> 
+            <a href="/authorization/validation/virus/{{_id}}">
+            <img id = "first" src="../images/{{image}}" alt="cover">
+            </a>
             {{/each}}
         </div>
     </div>

@@ -20,6 +20,22 @@ const employees = [
         level: "3",
         position: "Local Head of Security",
        },
+       {
+        number: "7070",
+        level: "4",
+        position: "Umbrella division Director",
+       },
+       {
+        number: "8080",
+        level: "5",
+        position: "Umbrella division Director",
+       },
+
+       {
+        number: "9090",
+        level: "6",
+        position: "Umbrella Corporation Comissioner",
+       },
   ];
 
   const viruses = [
@@ -87,19 +103,19 @@ mongoose
     console.log(`An error occurred while creating emloyees from the DB: ${err}`);
   });
 
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(x => {
-    console.log(`Seed.js connected to Mongo database: "${x.connections.name}"`);
-    return Virus.create(viruses);
-  })
-  .then(virusesFromDB => {
-    console.log(`Created ${virusesFromDB.length} viruses`);
-    return mongoose.connection.close();
-  })
-  .then(() => {
-    console.log('DB connection closed!');
-  })
-  .catch(err => {
-    console.log(`An error occurred while creating viruses from the DB: ${err}`);
-  });
+// mongoose
+//   .connect(process.env.MONGODB_URI)
+//   .then(x => {
+//     console.log(`Seed.js connected to Mongo database: "${x.connections.name}"`);
+//     return Virus.create(viruses);
+//   })
+//   .then(virusesFromDB => {
+//     console.log(`Created ${virusesFromDB.length} viruses`);
+//     return mongoose.connection.close();
+//   })
+//   .then(() => {
+//     console.log('DB connection closed!');
+//   })
+//   .catch(err => {
+//     console.log(`An error occurred while creating viruses from the DB: ${err}`);
+//   });
