@@ -17,7 +17,6 @@ window.onload = () => {
     }
 
     function applyAnimation2(element) {
-        audio1.play();
         element.style.borderBottom =  "1px solid black";
         element.style.transition= "0.3s ease background";
     }
