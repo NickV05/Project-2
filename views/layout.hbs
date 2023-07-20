@@ -31,21 +31,21 @@
         <h2>Welcome {{ user.fullName }}!</h2>
         
 
+          {{#unless level}}
           <form class="logout-form" action="/auth/userProfile/{{user._id}}" method="GET">
           <button>Profile</button>
           </form>
-
           <form class="logout-form" action="/forum" method="GET">
           <button>Forum</button>
           </form>
-
+          {{/unless}}
           <form class="logout-form" action="/auth/logout" method="POST">
           <button>Logout</button>
           </form>
 
           {{#unless isEmployee}}
           <form action="/authorization/validate" method="POST">
-          <input type="text" name="number" placeholder="Employee ID#" />
+          <input type="password" name="number" placeholder="Employee ID#" />
           </form>
           {{/unless}}
 

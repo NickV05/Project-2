@@ -455,6 +455,7 @@ padding-top:55px;
     justify-content: flex-start;
     align-items: center;
     width:200px;
+    margin-left:20px;
   }
 
   .forumDiv2{
@@ -771,6 +772,12 @@ padding-top:55px;
           margin: 0;
         }
 
+        .back-black2 {
+          background-color: black;
+          margin: 0;
+          width: 100vw;
+          height:91.5vh;
+        }
         .back-white { 
           background-color: white;
         }
@@ -790,6 +797,12 @@ padding-top:55px;
           height: 100%;
           object-fit: cover;
       }
+
+      .video-container h3 {
+        position: relative;
+        color: white;
+    }
+
 
 
 
