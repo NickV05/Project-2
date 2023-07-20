@@ -65,7 +65,7 @@ app.use(function(err, req, res, next) {
 });
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/Project2")
+  .connect(process.env.MONGODB_URI)
   .then((connection) =>
     console.log("connected to " + connection.connection.name)
   )
