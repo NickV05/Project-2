@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const employeeSchema = new Schema({
    number: { type: String},
+   password: { type: String},
    level: { type: String},
    position: { type: String},
   },

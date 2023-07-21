@@ -7,34 +7,9 @@ const Virus = require('./models/Virus.model');
 const employees = [
     {
         number: "4040",
+        password:"1111",
         level: "1",
         position: "Junior Researcher",
-       },
-       {
-        number: "5050",
-        level: "2",
-        position: "Lab Manager",
-       },
-    {
-        number: "6060",
-        level: "3",
-        position: "Local Head of Security",
-       },
-       {
-        number: "7070",
-        level: "4",
-        position: "Umbrella division Director",
-       },
-       {
-        number: "8080",
-        level: "5",
-        position: "Umbrella division Director",
-       },
-
-       {
-        number: "9090",
-        level: "6",
-        position: "Umbrella Corporation Comissioner",
        },
   ];
 

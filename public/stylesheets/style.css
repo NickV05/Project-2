@@ -99,7 +99,7 @@ form button:hover {
 }
 
 .navBar h2 {
-  width:500px;
+  width:260px;
   height:30px;
   margin: 0;
   display: flex;
@@ -807,6 +807,9 @@ padding-top:55px;
         padding-right: 10px;
         padding-bottom: 10px;
         border: 1px solid rgba(255, 255, 255, 0.5);
+        height:380px;
+        width:272px
+
     }
 
     .whiteContentRight{
@@ -823,7 +826,7 @@ padding-top:55px;
   .whiteContentRight a {
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.5);
-    height:75px;
+    height:100px;
     width:150px;
     text-decoration: none;
     color:rgba(255, 255, 255, 0.5);
@@ -835,7 +838,7 @@ padding-top:55px;
 
 .whiteContentRight a img{
   position: relative;
-  height:75px;
+  height:100px;
   width:150px;
 }
 
@@ -895,5 +898,16 @@ padding-top:55px;
       width:400px;
     }
 
-    
+    #employeeForm{
+      display:flex;
+      gap:20px;
+      align-items: center;
+
+    }
+
+    #employeeForm input{
+      width:120px;
+      margin-top: 12px;
+      
+    }
         

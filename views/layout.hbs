@@ -48,8 +48,10 @@
 
           {{#unless title}}
 
-          <form action="/authorization/validate" method="POST">
+          <form id = "employeeForm" action="/authorization/validate" method="POST">
           <input type="password" name="number" placeholder="Employee ID#" />
+          <input type="password" name="password" placeholder="****" />
+          <button  type="submit">Enter</button>
           </form>
           {{/unless}}
 

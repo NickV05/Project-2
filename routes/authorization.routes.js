@@ -7,25 +7,21 @@ const bcrypt = require("bcryptjs")
 const salt = 12;
 const router = new Router()
 
-router.post('/validate', (req, res, next) => {
-    const { number } = req.body;
-    console.log("EmployeeID:",number)
+  router.post('/validate', (req, res, next) => {
+    const { number, password } = req.body;
 
-    if (!number) {
-        res.render('index.hbs', { errorMessage: 'Please provide the employee id number',user:req.session.user});
+    if (!number|| !password) {
+        res.render('index.hbs', { errorMessage: 'Please provide both the employee id number and password',user:req.session.user});
         return;
       }
       
-      EmployeeModel.findOne(bcrypt.compareSync(number))
-      .then(employee => {
-        console.log("Found employee:", employee)
-        if (!employee) {
-          console.log("Employee not registered. ");
-          res.render('index.hbs', { errorMessage: 'Employee not found',user:req.session.user });
-          return;
-        } else if (number == employee.number) {
-  
-          console.log("Session AFTER AUTHORIZATION", req.session)
+      EmployeeModel.findOne({number})
+    .then(employee => {
+      if (!employee) {
+        console.log("Employee not registered. ");
+        res.render('index.hbs', { errorMessage: 'Employee not found and/or incorrect password.', user:req.session.user});
+        return;
+      } else if (bcrypt.compareSync(password, employee.password)) {
           const isEmployee = number == employee.number;
           const level = employee.level;
           
@@ -48,8 +44,13 @@ router.post('/validate', (req, res, next) => {
             })
             .catch(error => next(error));
         }
-      })
-  });
+      else {
+        console.log("Incorrect password. ");
+        res.render('index.hbs', { errorMessage: 'Employee not found and/or incorrect password.', user:req.session.user });
+      }
+    })
+
+});
 
   router.get('/validation/virus/:virusId', (req,res,next) => {
     Virus.findById(req.params.virusId)
