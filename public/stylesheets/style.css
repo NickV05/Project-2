@@ -910,4 +910,13 @@ padding-top:55px;
       margin-top: 12px;
       
     }
+
+    .enter{
+      margin-top:10px;
+    }
+    .editTopicScreen{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
         

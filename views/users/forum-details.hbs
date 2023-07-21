@@ -2,10 +2,10 @@
     <div id ="topicView">
     <h2>Topic Details</h2>
     <h3 id ="topicText">{{foundTopic.topicName}}</h3>
-    <img id = "topicImg2" src="/images/{{foundTopic.photo}}" alt="topicPhoto">
+    <img id = "topicImg2" src="{{foundTopic.photo}}" alt="topicPhoto">
     <p id ="contentText">{{foundTopic.content}}</p>
     <br>
-    <p id = "authorText">Author:<img id = "authorAv" src="/images/{{foundTopic.creator.avatar}}" alt="picture"> <p id = "authorText2"><a href="/auth/userProfile/{{foundTopic.creator._id}}">{{foundTopic.creator.fullName}}</a></p></p>
+    <p id = "authorText">Author:<img id = "authorAv" src="{{foundTopic.creator.avatar}}" alt="picture"> <p id = "authorText2"><a href="/auth/userProfile/{{foundTopic.creator._id}}">{{foundTopic.creator.fullName}}</a></p></p>
     <p class = "date">Created {{createdDate}} at {{createdTime}}</p>
     {{#if updateTime}}
     <p class = "date">Updated {{updDate}} at {{updTime}}</p>
@@ -41,7 +41,7 @@
         <div class = "comProf">
 
             <div class = "divImagProf">
-             <img id = "userAv" src="/images/{{user.avatar}}" alt="picture">
+             <img id = "userAv" src="{{user.avatar}}" alt="picture">
             </div>
 
             <div class ="dateInfo">
@@ -65,7 +65,7 @@
         <div class = "comProf">
 
             <div class = "divImagProf">
-             <img id = "userAv" src="/images/{{user.avatar}}" alt="picture">
+             <img id = "userAv" src="{{user.avatar}}" alt="picture">
             </div>
 
             <div class ="dateInfo">

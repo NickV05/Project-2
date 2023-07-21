@@ -18,7 +18,7 @@ const userSchema = new Schema(
     },
     avatar: {
       type: String,
-      default: 'vector.png',
+      default: 'https://res.cloudinary.com/dyto7dlgt/image/upload/v1689954676/project-2/fu0iymmcwhd6xofoftos.png',
     },
     employee: {
       type: Boolean,

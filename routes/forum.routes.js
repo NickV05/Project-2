@@ -5,7 +5,9 @@ const Topic = require("../models/Topic.model")
 const Review = require("../models/Review.model")
 const router = new Router()
 
-const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
+const fileUploader = require('../middleware/cloudinary')
+
+const { isLoggedIn} = require('../middleware/route-guard.js');
 
 router.get('/', (req,res,next) => {
   Topic.find()
@@ -36,7 +38,7 @@ router.get('/', (req,res,next) => {
       topicName,
       content,
       creator: req.session.user._id,
-      photo: "topic.jpg",
+      photo: "https://res.cloudinary.com/dyto7dlgt/image/upload/v1689952959/project-2/r7q5izw2ybeabd3qdrve.jpg",
     })
        .then((addToUser) => {
       console.log("Adding topic to profile", addToUser)
@@ -89,15 +91,17 @@ router.get('/edit/:topicId',isLoggedIn, (req, res, next) => {
 
 })
 
-router.post('/edit/:topicId', (req, res, next) => {
+router.post('/edit/:topicId', fileUploader.single('photo'), (req, res, next) => {
+
+  console.log("REQ.BODY", req.body)
 
   const {topicName, content, photo } = req.body
-  if(photo == ""){
+  if(!req.file){
     Topic.findByIdAndUpdate(
       req.params.topicId,
       {
         topicName,
-        content,
+        content
       },
       {new: true}
   )
@@ -115,7 +119,7 @@ router.post('/edit/:topicId', (req, res, next) => {
         {
           topicName,
           content,
-          photo
+          photo: req.file.path
         },
         {new: true}
     )

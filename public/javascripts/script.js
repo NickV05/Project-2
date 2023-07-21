@@ -57,9 +57,5 @@ window.onload = () => {
         const [buttonId, divId] = pair;
         setupButtonAnimation(buttonId, divId);
     });
-    
-    document.getElementById('goBackButton').addEventListener('click', () => {
-        window.history.back();
-      });
 
 }

@@ -1,10 +1,8 @@
 const {Router} = require('express')
-const mongoose = require('mongoose')
 const User = require("../models/User.model")
 const Virus = require("../models/Virus.model")
 const EmployeeModel = require('../models/Employee.model')
 const bcrypt = require("bcryptjs")
-const salt = 12;
 const router = new Router()
 
   router.post('/validate', (req, res, next) => {

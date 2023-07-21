@@ -1,6 +1,8 @@
+
+<div class = "editTopicScreen">
 <div class = "forumDiv">
          <h2>Edit your topic</h2>
-        <form class = "forumDiv" action="/forum/edit/{{foundTopic._id}}" method="POST">
+        <form class = "forumDiv" action="/forum/edit/{{foundTopic._id}}" method="POST" enctype="multipart/form-data">
         <label> Topic Name
         <textarea id = "topic"  cols="40" rows="5" name="topicName" >{{foundTopic.topicName}}</textarea>
         </label>
@@ -9,7 +11,7 @@
         <textarea id = "content"  cols="40" rows="5" name="content">{{foundTopic.content}}</textarea>
         </label>
 
-        <img class = "topicImg" src="/images/{{foundTopic.photo}}" alt="picture">
+        <img class = "topicImg" src="{{foundTopic.photo}}" alt="picture">
         <label for="photo">Topic photo</label>
         <input type="file" name="photo" id="photo" value="/images/topic.jpg">
         <button type="submit">EDIT Topic</button>
@@ -18,3 +20,5 @@
     {{/if}}
     </form>
     </div>
+
+</div>

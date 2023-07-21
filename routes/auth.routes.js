@@ -4,6 +4,8 @@ const User = require("../models/User.model")
 const bcrypt = require("bcryptjs")
 const router = new Router()
 
+const fileUploader = require('../middleware/cloudinary')
+
 const salt = 12;
 
 const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
@@ -109,7 +111,7 @@ User.findById(req.params.userID)
   .populate('reviews')
   .then((foundUser) => {
     if(!foundUser.avatar){
-      foundUser.avatar = 'vector.png'
+      foundUser.avatar = 'https://res.cloudinary.com/dyto7dlgt/image/upload/v1689954676/project-2/fu0iymmcwhd6xofoftos.png'
     }
     const registered = new Date(`${foundUser.createdAt}`).toLocaleDateString();
     console.log("User in Session:",req.session.user)
@@ -126,16 +128,19 @@ User.findById(req.params.userID)
 
 });
 
-router.post("/userProfile/:userID", isLoggedIn, (req, res) => {
+router.post("/userProfile/:userID", fileUploader.single('avatar'), isLoggedIn, (req, res) => {
   const { fullName, avatar, username} = req.body
-  if(avatar == ""){
+
+  console.log("SESSION", req.session)
+
+  if(!req.file){
     User.findByIdAndUpdate(
       req.params.userID,
         {
             fullName,
             username,
-            avatar:req.session.user.avatar
-        },
+            avatar: req.session.user.avatar
+        }, 
         {new: true}
     )
     .then((updatedUser) => {
@@ -153,7 +158,7 @@ router.post("/userProfile/:userID", isLoggedIn, (req, res) => {
       req.params.userID,
         {
             fullName,
-            avatar,
+            avatar: req.file.path,
             username
         },
         {new: true}
