@@ -34,11 +34,11 @@ $ npm i dotenv mongoose bcryptjs cloudinary connect-mongo luxon --save multer
 
 Also you will need to create .env file in you project folder and add following keys:
 
-PORT (the one that you want to have your localhost)
-MONGODB_URI (your db link)
-CLOUDINARY_NAME
-CLOUDINARY_KEY
-CLOUDINARY_SECRET
+PORT (the one that you want to have your localhost),
+MONGODB_URI (your db link),
+CLOUDINARY_NAME,
+CLOUDINARY_KEY,
+CLOUDINARY_SECRET,
 
 ## Dev
 
