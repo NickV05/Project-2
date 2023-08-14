@@ -1,9 +1,6 @@
-const audio1 = document.createElement("audio");
-  audio1.src = "../audio/select.mp3";
 
 window.onload = () => {
     function applyAnimation(element) {
-        audio1.play();
         element.style.animation = "do 1.5s ease-in infinite";
         element.style.border = "solid silver";
         element.style.borderRadius = "100%";
