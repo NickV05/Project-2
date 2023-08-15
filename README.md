@@ -21,14 +21,6 @@ Dependencies:
 "multer": "^1.4.5-lts.1",
 "multer-storage-cloudinary": "^4.0.0"
 
-Scripts:
-Add "dev": "nodemon ./bin/www" , yor script field should look like this:
-"scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
-  },
-
-$ npm i express --hbs --git express-with-hbs-configuration
 
 $ npm i dotenv mongoose bcryptjs cloudinary connect-mongo luxon --save multer 
 
@@ -36,7 +28,7 @@ Also you will need to create .env file in you project folder and add following k
 
 PORT (the one that you want to have your localhost),
 MONGODB_URI (your db link),
-CLOUDINARY_NAME,
+CLOUDINARY_NAME (your Cloudinary info),
 CLOUDINARY_KEY,
 CLOUDINARY_SECRET,
 
