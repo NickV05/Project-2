@@ -3,11 +3,8 @@ const mongoose = require('mongoose')
 const User = require("../models/User.model")
 const bcrypt = require("bcryptjs")
 const router = new Router()
-
 const fileUploader = require('../middleware/cloudinary')
-
 const salt = 12;
-
 const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
 
 router.get("/signup",isLoggedOut, (req,res) => {

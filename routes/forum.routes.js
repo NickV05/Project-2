@@ -152,6 +152,20 @@ router.get('/delete/:topicId', isLoggedIn, async (req, res, next) => {
 });
 
 
+router.get('/getBlogs', (req, res, next) => {
+  Topic.find()
+    .populate('creator')
+    .then((foundTopics) => {
+        console.log(foundTopics)          
+        res.json(foundTopics)
+    })
+    .catch((err) => {
+        console.log(err)
+        next(err)
+    })
+});
+
+
 router.get('/details/:topicId', (req, res, next) => {
 
   Topic.findById(req.params.topicId)
