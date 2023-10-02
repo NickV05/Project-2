@@ -151,18 +151,35 @@ router.get('/delete/:topicId', isLoggedIn, async (req, res, next) => {
   }
 });
 
-
 router.get('/getBlogs', (req, res, next) => {
   Topic.find()
     .populate('creator')
     .then((foundTopics) => {
-        console.log(foundTopics)          
-        res.json(foundTopics)
+        const filtered = foundTopics.filter(topic => topic.creator._id.toString() !== "64bad00fef1b151d43590173");
+        const sorted = filtered.sort((a, b) => {
+          const dateA = new Date(a.createdAt);
+          const dateB = new Date(b.createdAt);
+      
+          return dateB - dateA;
+        });
+
+        const sliced = sorted.slice(0, 3); 
+        const reducedTopics = sliced.map(topic => ({
+          _id: topic._id,
+          creator: {
+            _id: topic.creator._id,
+            fullName: topic.creator.fullName,
+          },
+          topicName: topic.topicName,
+          photo: topic.photo,
+        }));
+      
+        res.json(reducedTopics);
     })
     .catch((err) => {
-        console.log(err)
-        next(err)
-    })
+        console.log(err);
+        next(err);
+    });
 });
 
 
