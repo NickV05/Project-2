@@ -183,7 +183,7 @@ router.get('/getBlogs', (req, res, next) => {
 });
 
 
-router.get('/details/:topicId', (req, res, next) => {
+router.get('/details/:topicId',isLoggedIn, (req, res, next) => {
 
   Topic.findById(req.params.topicId)
   .populate('creator')
