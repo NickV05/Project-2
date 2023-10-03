@@ -137,6 +137,10 @@ router.post('/edit/:topicId', fileUploader.single('photo'), (req, res, next) => 
 router.get('/delete/:topicId', isLoggedIn, async (req, res, next) => {
   try {
     const topic = await Topic.findById(req.params.topicId);
+
+    if (!topic) {
+      return res.status(404).send("Topic not found");
+    }
     console.log("Topic that is found:", topic);
     for (const review of topic.reviews) {
       console.log("Each review:", review);
