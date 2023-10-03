@@ -155,7 +155,7 @@ router.get('/getBlogs', (req, res, next) => {
   Topic.find()
     .populate('creator')
     .then((foundTopics) => {
-        const filtered = foundTopics.filter(topic => topic.creator._id.toString() !== "64bad00fef1b151d43590173");
+        const filtered = foundTopics.filter(topic => topic._id.toString() !== "651473f3263b65a26bf6091d");
         const sorted = filtered.sort((a, b) => {
           const dateA = new Date(a.createdAt);
           const dateB = new Date(b.createdAt);
