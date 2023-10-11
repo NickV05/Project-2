@@ -16,7 +16,6 @@ const router = new Router()
       EmployeeModel.findOne({number})
     .then(employee => {
       if (!employee) {
-        console.log("Employee not registered. ");
         res.render('index.hbs', { errorMessage: 'Employee not found and/or incorrect password.', user:req.session.user});
         return;
       } else if (bcrypt.compareSync(password, employee.password)) {
@@ -34,16 +33,11 @@ const router = new Router()
            return Virus.find()
           })
           .then((viruses) =>{
-                console.log("Updated employee field", req.session.user.employee)
-                console.log("isEmployee:",isEmployee)
-                console.log("level:",level)
-                console.log("viruses:",viruses)
                 res.render("auth/indexEmployee.hbs",{user:req.session.user, isEmployee, level, employee, viruses, title:"Employees"})
             })
             .catch(error => next(error));
         }
       else {
-        console.log("Incorrect password. ");
         res.render('index.hbs', { errorMessage: 'Employee not found and/or incorrect password.', user:req.session.user });
       }
     })
@@ -53,7 +47,6 @@ const router = new Router()
   router.get('/validation/virus/:virusId', (req,res,next) => {
     Virus.findById(req.params.virusId)
     .then((foundVirus) => {
-      console.log(foundVirus)
       res.render('auth/virus.hbs',{user:req.session.user,foundVirus,title:"Project Info"})
     })
     .catch((err) => {

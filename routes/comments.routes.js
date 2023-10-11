@@ -17,7 +17,6 @@ router.post('/add-review/:topicId', (req, res, next) => {
           populate: { path: 'user' },
       })
         .then((foundTopic) => {
-            console.log("Found Topic", foundTopic)
             const userIsOwner = foundTopic.creator._id.toString() === req.session.user._id;
             const reviewOfOwner = foundTopic.reviews.filter((review) => review.user._id.toString() === req.session.user._id);
             const reviewOfNotOwner = foundTopic.reviews.filter((review) => review.user._id.toString() !== req.session.user._id);
@@ -60,7 +59,6 @@ router.post('/add-review/:topicId', (req, res, next) => {
         comment: req.body.comment
     })
     .then((newReview) => {
-        console.log("New review", newReview)
         Topic.findByIdAndUpdate(
             req.params.topicId,
             {

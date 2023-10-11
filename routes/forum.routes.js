@@ -12,8 +12,7 @@ const { isLoggedIn} = require('../middleware/route-guard.js');
 router.get('/', (req,res,next) => {
   Topic.find()
     .populate('creator')
-    .then((foundTopics) => {
-        console.log(foundTopics)          
+    .then((foundTopics) => {   
         res.render('users/forum.hbs', { topics: foundTopics, user: req.session.user })
     })
     .catch((err) => {
@@ -51,14 +50,11 @@ router.get('/', (req,res,next) => {
       )
   })
     .then((createdTopic) => {
-        console.log("Created Topic:", createdTopic)
         res.redirect('/forum')
     })
     .catch((error) => {
-      console.error("Validation Error:", error, error.message);
       console.log("Error", error);
       if (error instanceof mongoose.Error.ValidationError) {
-        console.log("MONGOOSE ERROR");
         Topic.find().then((topics) => {
           res
             .status(500)
@@ -81,7 +77,6 @@ router.get('/edit/:topicId',isLoggedIn, (req, res, next) => {
   Topic.findById(req.params.topicId)
   .populate('creator')
   .then((foundTopic) => {
-      console.log("Found Topic", foundTopic)
       res.render('users/edit-topic.hbs', {foundTopic, user: req.session.user})
   })
   .catch((err) => {
@@ -92,8 +87,6 @@ router.get('/edit/:topicId',isLoggedIn, (req, res, next) => {
 })
 
 router.post('/edit/:topicId', fileUploader.single('photo'), (req, res, next) => {
-
-  console.log("REQ.BODY", req.body)
 
   const {topicName, content, photo } = req.body
   if(!req.file){
@@ -141,13 +134,10 @@ router.get('/delete/:topicId', isLoggedIn, async (req, res, next) => {
     if (!topic) {
       return res.status(404).send("Topic not found");
     }
-    console.log("Topic that is found:", topic);
     for (const review of topic.reviews) {
-      console.log("Each review:", review);
       await Review.findByIdAndDelete(review);
     }
     const deletedTopic = await Topic.findByIdAndDelete(req.params.topicId);
-    console.log("Deleted topic:", deletedTopic);
     res.redirect('/forum');
   } catch (error) {
     console.error(error);
@@ -196,7 +186,6 @@ router.get('/details/:topicId',isLoggedIn, (req, res, next) => {
     populate: { path: 'user' },
 })
   .then((foundTopic) => {
-      console.log("Found Topic", foundTopic)
       const userIsOwner = foundTopic.creator._id.toString() === req.session.user._id;
       const reviewOfOwner = foundTopic.reviews.filter((review) => review.user._id.toString() === req.session.user._id);
       const reviewOfNotOwner = foundTopic.reviews.filter((review) => review.user._id.toString() !== req.session.user._id);

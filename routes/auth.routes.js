@@ -40,17 +40,15 @@ router.post("/signup", (req, res, next) => {
         )
       )
       .catch(error => {
-        console.log(error)
         if (error instanceof mongoose.Error.ValidationError) {
           res.status(500).render('auth/signup', { errorMessage: error.message });
         } else if (error.code === 11000) {
-   
-          console.log(" Username needs to be unique. Username is already used. ");
    
           res.status(500).render('auth/signup', {
              errorMessage: 'Username already exists.'
           });
         } else {
+          console.log(error);
           next(error);
         }
       });
@@ -62,7 +60,6 @@ router.get('/login', (req,res,next) => {
 })
 
 router.post('/login', (req, res, next) => {
-  console.log('SESSION =====> ', req.session);
   const { username, password } = req.body;
  
   if (username === '' || password === '') {
@@ -75,18 +72,13 @@ router.post('/login', (req, res, next) => {
   User.findOne({ username })
     .then(user => {
       if (!user) {
-        console.log("Username not registered. ");
         res.render('auth/login', { errorMessage: 'User not found and/or incorrect password.' });
         return;
       } else if (bcrypt.compareSync(password, user.passwordHash)) {
-        
+  
         req.session.user = user;
-
-        console.log("Session AFTER login", req.session)
-
         res.render("index",{user})
       } else {
-        console.log("Incorrect password. ");
         res.render('auth/login', { errorMessage: 'User not found and/or incorrect password.' });
       }
     })
@@ -111,15 +103,11 @@ User.findById(req.params.userID)
       foundUser.avatar = 'https://res.cloudinary.com/dyto7dlgt/image/upload/v1689954676/project-2/fu0iymmcwhd6xofoftos.png'
     }
     const registered = new Date(`${foundUser.createdAt}`).toLocaleDateString();
-    console.log("User in Session:",req.session.user)
-    console.log("Profile of User:", foundUser)
     const myProfile = req.session.user._id == foundUser._id.toString();
-    console.log("myProfile", myProfile)
-    console.log("user info",foundUser)
     res.render('users/user-profile.hbs', {foundUser, registered, myProfile, user:req.session.user});
   })
   .catch((err) => {
-    console.log("Error", err)
+    console.log(err)
     next(err)
   })
 
@@ -127,8 +115,6 @@ User.findById(req.params.userID)
 
 router.post("/userProfile/:userID", fileUploader.single('avatar'), isLoggedIn, (req, res) => {
   const { fullName, avatar, username} = req.body
-
-  console.log("SESSION", req.session)
 
   if(!req.file){
     User.findByIdAndUpdate(
@@ -141,12 +127,11 @@ router.post("/userProfile/:userID", fileUploader.single('avatar'), isLoggedIn, (
         {new: true}
     )
     .then((updatedUser) => {
-      console.log("line 127:", updatedUser)
       req.session.user = updatedUser
       res.redirect(`/auth/userProfile/${updatedUser._id}`);
     })
     .catch((err) => {
-        console.log(err)
+      console.log(err)
         next(err)
     })
   }
@@ -161,7 +146,6 @@ router.post("/userProfile/:userID", fileUploader.single('avatar'), isLoggedIn, (
         {new: true}
     )
     .then((updatedUser) => {
-      console.log("line 127:", updatedUser)
       req.session.user = updatedUser
       res.redirect(`/auth/userProfile/${updatedUser._id}`);
     })

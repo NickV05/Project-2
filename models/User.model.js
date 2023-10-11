@@ -24,7 +24,7 @@ const userSchema = new Schema(
       type: Boolean,
       default: false
     },
-    reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
+    reviews: [{ type: Schema.Types.ObjectId, ref: "" }],
     discussions: [{ type: Schema.Types.ObjectId, ref: "Topic" }]
   },
   {
